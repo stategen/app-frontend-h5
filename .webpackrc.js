@@ -1,0 +1,27 @@
+import {resolve} from "path";
+
+module.exports ={
+  devtool:"source-map",
+  // 接口代理示例
+  "proxy": {
+    "/app/api": {
+      "target": "http://jsonplaceholder.typicode.com/",
+      "changeOrigin": true,
+      "pathRewrite": { "^/app/api" : "" }
+    }
+  },
+  alias: {
+    "@apis": resolve(__dirname,"./src/facade/apis"),
+    "@enums": resolve(__dirname,"./src/facade/enums"),
+    "@beans": resolve(__dirname,"./src/facade/beans"),
+
+    "themes": resolve(__dirname, './src/themes'),
+    "@components": resolve(__dirname,"./src/components"),
+    "@utils": resolve(__dirname,"./src/utils"),
+    "@pages": resolve(__dirname,"./src/pages"),
+  },
+  urlLoaderExcludes: [
+    /\.svg$/,
+  ],
+  ignoreMomentLocale: true
+}
