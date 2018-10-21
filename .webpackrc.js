@@ -11,9 +11,7 @@ module.exports ={
     }
   },
   alias: {
-    "@apis": resolve(__dirname,"./src/facade/apis"),
-    "@enums": resolve(__dirname,"./src/facade/enums"),
-    "@beans": resolve(__dirname,"./src/facade/beans"),
+    "@i": resolve(__dirname,"./src/intergrade"),
 
     "themes": resolve(__dirname, './src/themes'),
     "@components": resolve(__dirname,"./src/components"),

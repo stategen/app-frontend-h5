@@ -17,4 +17,4 @@ package-lock.json
 # umi
 .umi
 .umi-production
-*~temp
+*@temp

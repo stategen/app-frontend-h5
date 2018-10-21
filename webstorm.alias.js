@@ -1,10 +1,8 @@
+/* for WebStorm*/
 module.exports = {
   resolve: {
-    // for WebStorm
     alias: {
-      "@apis": "./src/facade/apis",
-      "@enums": "./src/facade/enums",
-      "@beans": "./src/facade/beans",
+      "@i": "./src/intergrade",
 
       "themes": "./src/themes",
       "@components": "./src/components",

@@ -4,8 +4,9 @@ import pathToRegexp, {Token, Key} from 'path-to-regexp';
 import {message} from 'antd';
 // import 'whatwg-fetch';
 import {routerRedux} from 'dva/router'
-import ResponseExtend from "@beans/ResponseExtend";
+import ResponseExtend from "@i/beans/ResponseExtend";
 import fetch from "dva/fetch";
+
 
 export enum Method {
   GET = 'GET',
@@ -22,7 +23,7 @@ export enum MediaType {
 }
 
 export interface RequestInitEx extends RequestInit {
-  apiUrlkey?: string;
+  apiUrlKey?: string;
   url?: string;
   method?: Method | string,
   data?: {},
@@ -51,7 +52,7 @@ const buildRequestProperties = (requestInitEx: RequestInitEx): RequestInitEx => 
     method,
     mediaType,
     data,
-    apiUrlkey,
+    apiUrlKey,
   } = requestInitEx;
 
   const cloneData = data ? cloneDeep(data) : {};
@@ -76,8 +77,8 @@ const buildRequestProperties = (requestInitEx: RequestInitEx): RequestInitEx => 
 
   if (domain !== '') {
     url = domain + url;
-  } else if (apiUrlkey) {
-    url = window[apiUrlkey] + url;
+  } else if (apiUrlKey) {
+    url = window[apiUrlKey] + url;
   } else {
     url = location.host +'/' + url;
   }
@@ -135,10 +136,7 @@ export class Net {
     requestInitEx = {url: theUrl, ...requestInitEx};
     let requestProperties: RequestInitEx = buildRequestProperties(requestInitEx);
     let {url, ...requestInit} = requestProperties;
-    requestInit.mode = "no-cors";
-    /*requestInit.headers= {
-      "Content-Type": "application/x-www-form-urlencoded"
-    };*/
+    requestInit.mode = "cors";
     let value: any = fetch(url, requestInit)
       .then((response) => JSON.stringify(response))
       .catch((error) => {

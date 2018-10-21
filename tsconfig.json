@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es5",
+    "module": "es6",
     "target": "es6",
     "experimentalDecorators": true,
     "sourceMap": true,
@@ -15,9 +15,8 @@
     "baseUrl": "./",
     "paths": {
       /*for webstorm*/
-      "@apis/*":  ["src/facade/apis/*"],
-      "@enums/*": ["src/facade/enums/*"],
-      "@beans/*": ["src/facade/beans/*"],
+
+      "@i/*": ["./src/intergrade/*"],
 
       "themes/*": ["src/themes/*"],
       "@components/*": ["src/components/*"],
