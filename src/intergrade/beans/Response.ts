@@ -1,13 +1,13 @@
 /**
  *  Do not remove this unless you get business authorization.
- *  ResponseExtend
+ *  Response
  *  created by [stategen.progen] ,do not edit it manually otherwise your code will be override by next call progen,
- *  鐢� [stategen.progen]浠ｇ爜鐢熸垚鍣ㄥ垱寤猴紝涓嶈鎵嬪姩淇敼,鍚﹀垯灏嗗湪涓嬫鍒涘缓鏃惰嚜鍔ㄨ鐩�
+ *  由 [stategen.progen]代码生成器创建，不要手动修改,否则将在下次创建时自动覆盖
  */
 import ResponseStatus from "../enums/ResponseStatus";
 import {Bean} from "@utils/DvaUtil";
 
-export enum ResponseExtendFields {
+export enum ResponseFields {
   /** code */
   code = 'code',
   /** exeptionClass */
@@ -22,7 +22,7 @@ export enum ResponseExtendFields {
   success = 'success',
 }
 
-export default interface ResponseExtend<T> extends Bean {
+export default interface Response<T> extends Bean {
 
   /** code */
   code?: number;
