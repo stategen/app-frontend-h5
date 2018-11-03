@@ -5,6 +5,7 @@
  *  由 [stategen.progen]代码生成器创建，不要手动修改,否则将在下次创建时自动覆盖
  */
 import ResponseStatus from "../enums/ResponseStatus";
+import SimpleResponse from "../beans/SimpleResponse";
 import {Bean} from "@utils/DvaUtil";
 
 export enum ResponseFields {
@@ -16,13 +17,9 @@ export enum ResponseFields {
   data = 'data',
   /** status */
   status = 'status',
-  /** message */
-  message = 'message',
-  /** success */
-  success = 'success',
 }
 
-export default interface Response<T> extends Bean {
+export default interface Response<T> extends Bean, SimpleResponse {
 
   /** code */
   code?: number;
@@ -35,12 +32,6 @@ export default interface Response<T> extends Bean {
 
   /** status */
   status?: ResponseStatus;
-
-  /** message */
-  message?: string;
-
-  /** success */
-  success?: boolean;
 
 }
 

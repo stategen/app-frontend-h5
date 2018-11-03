@@ -2,7 +2,7 @@ import {message} from 'antd'
 import ResponseStatus from "@i/enums/ResponseStatus";
 import Response from "@i/beans/Response";
 import {routerRedux} from 'dva/router';
-import {loginInitModel} from "@i/interfaces/LoginFaces";
+import {LoginDispatch, loginInitModel} from "@i/interfaces/LoginFaces";
 
 export default {
   onError(e, dispatch) {
@@ -13,9 +13,7 @@ export default {
       const response: Response<any> = <Response<any>> responseError;
       if (response.status === ResponseStatus.NOT_LOGIN) {
         message.error(response.message);
-        dispatch(routerRedux.push({
-          pathname: loginInitModel.pathname,
-        }));
+        dispatch(LoginDispatch.route());
       }
     } else {
       message.error(e);
