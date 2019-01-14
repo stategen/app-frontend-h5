@@ -4,7 +4,8 @@
  *  created by [stategen.progen] ,do not edit it manually otherwise your code will be override by next call progen,
  *  由 [stategen.progen]代码生成器创建，不要手动修改,否则将在下次创建时自动覆盖
  */
-import {Effect, Effects, Reducers, IModel, BaseState, modelPathsProxy, BaseProps, Reducer, AreaState, Subscription, Subscriptions, RouterReduxPushPros} from '@utils/DvaUtil';
+import {Effect, Effects, Reducers, IModel, BaseState, modelPathsProxy, ConnectionPros, Reducer, AreaState, Subscription,
+        Subscriptions, RouterReduxPushPros, SetupParamsFun, mergeObjects, initAreaState, abstractModel} from '@utils/DvaUtil';
 import {loginCustomState,LoginCustomSubscriptions , LoginCustomEffects, LoginCustomReducers} from '@pages/login/LoginCustomFaces'
 import SimpleResponse from "../beans/SimpleResponse";
 import {routerRedux} from 'dva/router';
@@ -13,7 +14,7 @@ import queryString from 'query-string';
 export interface LoginInitState extends BaseState {
 }
 
-export type LoginState = LoginInitState & typeof loginCustomState;
+export type LoginState = LoginInitState & Partial<typeof loginCustomState>;
 
 export interface LoginInitSubscriptions extends Subscriptions{
 }
@@ -45,11 +46,11 @@ export interface LoginModel extends IModel<LoginState, LoginReducers, LoginEffec
   subscriptions?: LoginSubscriptions;
 }
 
-export interface LoginProps extends BaseProps {
+export interface LoginProps extends ConnectionPros {
   loginState?: LoginState,
 }
 
-export const loginInitModel: LoginModel = <LoginModel>{
+export let loginInitModel: LoginModel = <LoginModel>{
   namespace: 'login',
   pathname: '/login',
   state: {},
@@ -58,6 +59,13 @@ export const loginInitModel: LoginModel = <LoginModel>{
   effects: <LoginEffects>{},
 };
 
+loginInitModel.getInitState = () => {
+  const initState = loginCustomState;
+  return initState;
+}
+
+loginInitModel.state=loginInitModel.getInitState();
+loginInitModel = (mergeObjects(abstractModel, loginInitModel));
 
 /***把 namespace 带过来，以便生成路径*/
 export const loginEffects = modelPathsProxy<LoginEffects>(loginInitModel);
@@ -77,7 +85,7 @@ export class LoginDispatch {
   }
 
   /**  */
-  static login_effect(params: { username: string, password: string }, areaExtraProps__?: AreaState<any>, stateExtraProps__?: LoginState) {
+  static login_effect(params: { username?: string, password?: string }, areaExtraProps__?: AreaState<any>, stateExtraProps__?: LoginState) {
     return {
       type: loginInitModel.namespace + '/login',
       payload: {
@@ -88,6 +96,7 @@ export class LoginDispatch {
     }
   };
 
+
   static updateState_reducer(loginState: LoginState) {
     return {
       type: loginInitModel.namespace + '/updateState',
@@ -96,4 +105,5 @@ export class LoginDispatch {
       }
     }
   }
+
 }

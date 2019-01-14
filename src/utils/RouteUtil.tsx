@@ -1,15 +1,5 @@
-import Menu, {MENU_ID} from "@i/beans/Menu";
 import pathToRegexp from "path-to-regexp";
-import Link from "umi/link";
-import {Icon} from "antd";
-import {config} from "@utils/index";
-import {makeMap} from "@utils/DvaUtil";
-import {string} from "prop-types";
-import {History} from "history";
-import {RouteOrders} from "@pages/app/AppCustomFaces";
-
-const {prefix} = config;
-
+import {RouteOrders, SetupProps} from "@utils/DvaUtil";
 
 export default class RouteUtil {
 
@@ -18,29 +8,41 @@ export default class RouteUtil {
     return pathname;
   }
 
-  static isRoutMatchPathname(route, pathname: string): boolean {
-    return pathToRegexp(route || '').exec(pathname) != null;
+  static getMatch(route:string, pathname: string, keys?: any[]): RegExpExecArray {
+    keys = keys || [];
+    const regEx = pathToRegexp(route || '', keys, {end: false});
+    const match = regEx.exec(pathname);
+    return match;
   }
 
-  static filterMenuByPathname(pathname: string, menus: Menu[]) {
-    pathname = this.getRealPathname(pathname);
-    for (let i = 0; i < menus.length; i++) {
-      const menu = menus[i];
-      if (this.isRoutMatchPathname(menu.route, pathname)) {
-        return menu;
-      }
+  static getParams({pathname, match, keys}: SetupProps) {
+    if (match) {
+      const names = keys.map(key => key.name);
+      const params = names.reduce((memo, name, idx) => {
+        memo[name] = match[idx + 1];
+        return memo
+      }, {});
+      return params;
     }
     return null;
+  };
+
+  static compileRoute(route: string, params: {}) {
+    let toPathFn = pathToRegexp.compile(route || "");
+    return toPathFn(params);
   }
 
-  static isRouteOpend(routeOrders:RouteOrders, pathname: string): boolean {
+  static isRouteOpend(routeOrders: RouteOrders, pathname: string): boolean {
     if (pathname) {
       pathname = this.getRealPathname(pathname);
+      if (pathname.indexOf(":") > 0) {
+        return true;
+      }
       const routes = Object.keys(routeOrders);
       for (let i = 0; i < routes.length; i++) {
-        const route = routes[i]
-        if (this.isRoutMatchPathname(route, pathname)) {
-          return true
+        const route = routes[i];
+        if (this.getMatch(route, pathname)) {
+          return true;
         }
       }
     }
@@ -52,13 +54,12 @@ export default class RouteUtil {
     //1留给dashborad
     let maxOpendOrder = 1;
     const values = Object.values(routeOrders);
-    const maxOrder=Math.max(maxOpendOrder, ...values) + 1;
+    const maxOrder = Math.max(maxOpendOrder, ...values) + 1;
     return maxOrder;
   }
 
 
-
-  static checkNotExistAndGetNextOrder(routeOrders:RouteOrders, route: string): number {
+  static checkNotExistAndGetNextOrder(routeOrders: RouteOrders, route: string): number {
     if (route) {
       if (!routeOrders[route]) {
         const nextMaxOpendOrder = this.getNextMaxOpendOrder(routeOrders);
@@ -68,7 +69,7 @@ export default class RouteUtil {
     return null;
   }
 
-  static checkAndGetPreOrder(opendOrders :RouteOrders, inactiveRoute: string): string {
+  static checkAndGetPreOrder(opendOrders: RouteOrders, inactiveRoute: string): string {
     let maxOpendOrder = 0;
     let route = null;
     Object.keys(opendOrders).forEach((tempRoute) => {
@@ -82,6 +83,17 @@ export default class RouteUtil {
     });
 
     return route;
+  }
+
+  static getQuery(listener) {
+    const query = listener.query;
+    if (query && query instanceof Object) {
+      return query;
+      // for (let i in query) {
+      //   return query;
+      // }
+    }
+    return null;
   }
 }
 

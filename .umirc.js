@@ -1,33 +1,64 @@
+import {resolve} from "path";
+
 export default {
-  publicPath :'static',
-  outputPath :'../WebRoot/pages',
+  base: 'pages/',
+  publicPath: 'static/',
+  hash:true,
+  outputPath: '../WebRoot/pages/static',
+  // for query-string@6 https://github.com/sorrycc/blog/issues/68
+  es5ImcompatibleVersions: true,
+  targets: { ie: 11 },
+  runtimePublicPath: true,
+  devtool: "source-map",
   plugins: [
-    'umi-plugin-dva',
     [
-      'umi-plugin-routes',
+      'umi-plugin-react',
       {
-        exclude: [
-          /.*(model|Faces)\.(j|t)s(x)?$/i,
-          /.*(model|Faces)\.temp$/i,
-          /service\.(j|t)?(x)?$/i,
-          /chart\/Container\.(t|j)s(x)?$/,
-          /models\//,
-          /pages\/app\//,
-          /components\//,
-          /services\//,
-          /utils\//,
-          /pages\/app\//,
-          /intergrade\//,
-        ],
-      },
+        dva: true,
+        antd: true,
+        routes: {
+          exclude: [
+            /model\.(j|t)sx?$/,
+            /service\.(j|t)sx?$/,
+            /models\//,
+            /components\//,
+            /services\//,
+            /pages\/app\//,
+
+          ],
+        },
+        dll: {
+          exclude: [],
+          include: ["dva", "dva/router", "dva/saga", "dva/fetch", "antd/es","antd-mobile/es"],
+        },
+        hardSource: /* isMac */process.platform === 'darwin',
+        dynamicImport: {
+          webpackChunkName: true,
+          hash:true,
+          level: 0,
+          loadingComponent: './components/loading/index',
+        },
+
+        pwa: false,
+        hd: false,
+        fastClick: true,
+        title: 'cnode-with-umi',
+      }
     ],
-    [
-      'umi-plugin-dll',
-      {
-        exclude: [],
-        include: ["dva", "dva/router", "dva/saga", "dva/fetch", "antd/es"],
-      },
-    ],
-    './modifyHTMLScript.js'
   ],
-}
+  alias: {
+    "@": resolve(__dirname, "./src/"),
+    "@i": resolve(__dirname, "./src/intergrade"),
+
+    "themes": resolve(__dirname, "./src/themes"),
+    "@components": resolve(__dirname, "./src/components"),
+    "@utils": resolve(__dirname, "./src/utils"),
+    "@pages": resolve(__dirname, "./src/pages"),
+    "@images": resolve(__dirname, "./src/images"),
+
+
+    "config": "./src/utils/config",
+    "services": "./src/services",
+    "routes": "./src/routes"
+  },
+};

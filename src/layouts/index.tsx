@@ -1,21 +1,19 @@
 import React from 'react';
-import styles from './index.less';
-import Header from './_header';
-import Footer from './_footer';
-import withRouter from 'umi/withRouter';
+import {LocaleProvider} from 'antd'
+import enUS from 'antd/es/locale-provider/en_US'
+import withRouter from 'umi/withRouter'
+import App from '@pages/app'
+import Loading from "@components/loading";
 
-function Layout({ children, location }) {
-  return (
-    <div className={styles.normal}>
-      <Header location={location} />
-      <div className={styles.content}>
-        <div className={styles.main}>
-          {children}
-        </div>
-      </div>
-      <Footer />
-    </div>
-  );
-}
+export default withRouter((props) => {
+    return (
+      <LocaleProvider locale={enUS}>
+        <App>
+          {/*<Loading isLoading={props.global}/>*/}
+          {props.children}
+        </App>
+      </LocaleProvider>
+    )
+  }
+);
 
-export default withRouter(Layout);

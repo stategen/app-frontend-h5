@@ -1,25 +1,20 @@
+
 import React from 'react';
-import { connect } from 'dva';
-import Link from 'umi/link';
-import styles from './index.css';
+import router from 'umi/router';
 
-function IndexPage() {
-  const mytest = () => {
-    console.log(1);
-  }
-  return (
-    <div className={styles.normal}>
-      <h1 className={styles.title}>Welcome to dva!</h1>
-      <div className={styles.welcome} />
-      <ul className={styles.list}>
-        <li onClick={mytest}>To get started, edit <code>src/index.js</code> and save to reload.</li>
-        <li><Link to="/users">Getting Started</Link></li>
-      </ul>
-    </div>
-  );
-}
+import Redirect from 'umi/redirect'
+import {homeInitModel} from "@i/interfaces/HomeFaces";
 
-IndexPage.propTypes = {
-};
+export default () => <Redirect to={homeInitModel.pathname} />
 
-export default connect()(IndexPage);
+
+// class Index extends React.PureComponent {
+//     componentDidMount() {
+//         router.replace('/home');
+//     }
+//     render() {
+//         return null;
+//     }
+// }
+//
+// export default Index;
