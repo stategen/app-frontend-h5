@@ -29,8 +29,13 @@ export type TopicSubscriptions = TopicInitSubscriptions & TopicCustomSubscriptio
 export interface TopicInitEffects extends Effects {
   setup?: Effect;
   /**  */
+  delete?: Effect,
+  /**  */
+  deleteBatch?: Effect,
+  /**  */
   getTopicPageList?: Effect,
   getTopicPageList_next?: Effect,
+  getTopicPageList_refresh?: Effect,
   /**  */
   update?: Effect,
 }
@@ -39,6 +44,10 @@ export type TopicEffects = TopicInitEffects & TopicCustomEffects;
 
 interface TopicInitReducers<S extends TopicState> extends Reducers<S> {
   setup_success?: Reducer<TopicState>,
+  /**   成功后 更新状态*/
+  delete_success?: Reducer<TopicState>,
+  /**   成功后 更新状态*/
+  deleteBatch_success?: Reducer<TopicState>,
   /**   成功后 更新状态*/
   getTopicPageList_success?: Reducer<TopicState>,
   /**   成功后 更新状态*/
@@ -114,6 +123,32 @@ export class TopicDispatch {
   }
 
   /**  */
+  static delete_effect(params: { topicId?: string }, areaExtraProps__?: AreaState<any>, stateExtraProps__?: TopicState) {
+    return {
+      type: topicInitModel.namespace + '/delete',
+      payload: {
+        ...params,
+        areaExtraProps__,
+        stateExtraProps__,
+      }
+    }
+  };
+
+
+  /**  */
+  static deleteBatch_effect(params: { topicIds?: string[] }, areaExtraProps__?: AreaState<any>, stateExtraProps__?: TopicState) {
+    return {
+      type: topicInitModel.namespace + '/deleteBatch',
+      payload: {
+        ...params,
+        areaExtraProps__,
+        stateExtraProps__,
+      }
+    }
+  };
+
+
+  /**  */
   static getTopicPageList_effect(params: { topicType?: TopicType, mdrender?: boolean, page?: number, pageSize?: number }, areaExtraProps__?: AreaState<any>, stateExtraProps__?: TopicState) {
     return {
       type: topicInitModel.namespace + '/getTopicPageList',
@@ -128,6 +163,14 @@ export class TopicDispatch {
   static getTopicPageList_next_effect() {
     return {
       type: topicInitModel.namespace + '/getTopicPageList_next',
+      payload: {
+      }
+    }
+  };
+
+  static getTopicPageList_refresh_effect() {
+    return {
+      type: topicInitModel.namespace + '/getTopicPageList_refresh',
       payload: {
       }
     }

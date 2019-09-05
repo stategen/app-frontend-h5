@@ -6,7 +6,38 @@
  */
 import {Net, Method, MediaType, RequestInitEx} from "@utils/Net";
 
+import Goods from "../beans/Goods";
+import HomeWrap from "../beans/HomeWrap";
+import PageList from "../beans/PageList";
 import {apiUrlKey} from "../configs/tradeApp-config";
 
 export default class HomeApis {
+  /**
+   * POST /api/home/homePageBelowConten
+   * 
+   */
+  static homePageBelowConten(params: { pageSize?: number, pageNum?: number }): PageList<Goods> {
+    let requestInit: RequestInitEx = <RequestInitEx>{};
+    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.url = '/api/home/homePageBelowConten';
+    requestInit.mediaType = MediaType.FORM;
+    requestInit.data = params;
+    requestInit.method = Method.POST;
+    return Net.fetch(requestInit);
+  }
+
+  /**
+   * POST /api/home/homePageContent
+   * 
+   */
+  static homePageContent(params: { lon?: number, lat?: number }): HomeWrap {
+    let requestInit: RequestInitEx = <RequestInitEx>{};
+    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.url = '/api/home/homePageContent';
+    requestInit.mediaType = MediaType.FORM;
+    requestInit.data = params;
+    requestInit.method = Method.POST;
+    return Net.fetch(requestInit);
+  }
+
 }

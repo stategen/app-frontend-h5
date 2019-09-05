@@ -14,6 +14,34 @@ import {apiUrlKey} from "../configs/tradeApp-config";
 
 export default class TopicApis {
   /**
+   * POST /api/topic/delete
+   * 
+   */
+  static delete(params: { topicId?: string } | string): string {
+    let requestInit: RequestInitEx = <RequestInitEx>{};
+    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.url = '/api/topic/delete';
+    requestInit.mediaType = MediaType.FORM;
+    requestInit.data = (params instanceof Object && !Array.isArray(params)) ? params : {topicId: params};
+    requestInit.method = Method.POST;
+    return Net.fetch(requestInit);
+  }
+
+  /**
+   * POST /api/topic/deleteBatch
+   * 
+   */
+  static deleteBatch(params: { topicIds?: string[] } | string[]): string[] {
+    let requestInit: RequestInitEx = <RequestInitEx>{};
+    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.url = '/api/topic/deleteBatch';
+    requestInit.mediaType = MediaType.FORM;
+    requestInit.data = (params instanceof Object && !Array.isArray(params)) ? params : {topicIds: params};
+    requestInit.method = Method.POST;
+    return Net.fetch(requestInit);
+  }
+
+  /**
    * POST /api/topic/getTopicPageList
    * 
    */

@@ -29,6 +29,8 @@ export interface User_meInitEffects extends Effects {
   setup?: Effect;
   /**  */
   getCurrentUser?: Effect,
+  /**  */
+  getTheUser?: Effect,
   /** 修改用户 */
   update?: Effect,
 }
@@ -39,6 +41,8 @@ interface User_meInitReducers<S extends User_meState> extends Reducers<S> {
   setup_success?: Reducer<User_meState>,
   /**   成功后 更新状态*/
   getCurrentUser_success?: Reducer<User_meState>,
+  /**   成功后 更新状态*/
+  getTheUser_success?: Reducer<User_meState>,
   /** 修改用户  成功后 更新状态*/
   update_success?: Reducer<User_meState>,
 }
@@ -55,6 +59,7 @@ export interface User_meModel extends IModel<User_meState, User_meReducers, User
   effects?: User_meEffects;
   subscriptions?: User_meSubscriptions;
   getCurrentUserInitParamsFn?: SetupParamsFun;
+  getTheUserInitParamsFn?: SetupParamsFun;
   getInitState?: () => User_meState;
 }
 
@@ -100,13 +105,16 @@ export class User_meDispatch {
     return routerRedux.push(pushRoute);
   }
 
-  static setup_effect(params?: {}, areaExtraProps__?: AreaState<any>, stateExtraProps__?: User_meState) {
+  static setup_effect(
+              getCurrentUserInitParams?: {params?: {}, areaExtraProps__?: AreaState<any>, stateExtraProps__?: User_meState},
+              getTheUserInitParams?: {params?: {}, areaExtraProps__?: AreaState<any>, stateExtraProps__?: User_meState},
+               params?: {}) {
     return {
       type: user_meInitModel.namespace + '/setup',
       payload: {
         ...params,
-        areaExtraProps__,
-        stateExtraProps__,
+        getCurrentUserInitParams,
+        getTheUserInitParams,
       }
     }
   }
@@ -115,6 +123,19 @@ export class User_meDispatch {
   static getCurrentUser_effect(params?: {}, areaExtraProps__?: AreaState<any>, stateExtraProps__?: User_meState) {
     return {
       type: user_meInitModel.namespace + '/getCurrentUser',
+      payload: {
+        ...params,
+        areaExtraProps__,
+        stateExtraProps__,
+      }
+    }
+  };
+
+
+  /**  */
+  static getTheUser_effect(params?: {}, areaExtraProps__?: AreaState<any>, stateExtraProps__?: User_meState) {
+    return {
+      type: user_meInitModel.namespace + '/getTheUser',
       payload: {
         ...params,
         areaExtraProps__,

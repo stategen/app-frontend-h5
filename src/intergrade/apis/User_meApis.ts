@@ -27,6 +27,20 @@ export default class User_meApis {
   }
 
   /**
+   * POST /api/user/getTheUser
+   * 
+   */
+  static getTheUser(params?: {}): User {
+    let requestInit: RequestInitEx = <RequestInitEx>{};
+    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.url = '/api/user/getTheUser';
+    requestInit.mediaType = MediaType.FORM;
+    requestInit.data = params;
+    requestInit.method = Method.POST;
+    return Net.fetch(requestInit);
+  }
+
+  /**
    * POST /api/user/update
    * 修改用户
    */

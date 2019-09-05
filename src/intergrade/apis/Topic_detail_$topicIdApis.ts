@@ -17,7 +17,7 @@ export default class Topic_detail_$topicIdApis {
    * POST /api/topic/:topicId/postReply
    * 
    */
-  static PostReply(params: { topicId: string, topicReply?: TopicReply }): TopicReply {
+  static PostReply(params: { topicId: string, replyId?: string, authorId?: string, content?: string, parentReplyId?: string }): TopicReply {
     let requestInit: RequestInitEx = <RequestInitEx>{};
     requestInit.apiUrlKey = apiUrlKey;
     requestInit.url = '/api/topic/:topicId/postReply';

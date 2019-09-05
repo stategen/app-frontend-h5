@@ -133,7 +133,7 @@ export class Topic_detail_$topicIdDispatch {
   }
 
   /**  */
-  static PostReply_effect(params: { topicId?: string, topicReply?: TopicReply }, areaExtraProps__?: AreaState<any>, stateExtraProps__?: Topic_detail_$topicIdState) {
+  static PostReply_effect(params: { topicId?: string, replyId?: string, authorId?: string, content?: string, parentReplyId?: string }, areaExtraProps__?: AreaState<any>, stateExtraProps__?: Topic_detail_$topicIdState) {
     return {
       type: topic_detail_$topicIdInitModel.namespace + '/PostReply',
       payload: {

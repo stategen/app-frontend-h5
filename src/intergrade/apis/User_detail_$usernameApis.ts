@@ -27,6 +27,20 @@ export default class User_detail_$usernameApis {
   }
 
   /**
+   * POST /api/userDetail/getTheUser
+   * 
+   */
+  static getTheUser(params?: {}): User {
+    let requestInit: RequestInitEx = <RequestInitEx>{};
+    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.url = '/api/userDetail/getTheUser';
+    requestInit.mediaType = MediaType.FORM;
+    requestInit.data = params;
+    requestInit.method = Method.POST;
+    return Net.fetch(requestInit);
+  }
+
+  /**
    * POST /api/userDetail/:username
    * 
    */

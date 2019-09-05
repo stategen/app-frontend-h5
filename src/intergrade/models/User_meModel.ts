@@ -16,10 +16,14 @@ import User from "../beans/User";
 export class User_meCommand extends BaseCommand {
   static * setup_effect({payload}, {call, put, select}) {
     let newPayload = {};
+    const {getCurrentUserParams = null, getTheUserParams = null, ...lastParams} = payload || {};
 
     /**  */
-    const getCurrentUserPayload = yield User_meCommand.getCurrentUser_effect({payload}, {call, put, select});
+    const getCurrentUserPayload = yield User_meCommand.getCurrentUser_effect({payload: {...lastParams, ...getCurrentUserParams}}, {call, put, select});
     newPayload = User_meCommand.getCurrentUser_success_reducer(<User_meState>newPayload, getCurrentUserPayload);
+    /**  */
+    const getTheUserPayload = yield User_meCommand.getTheUser_effect({payload: {...lastParams, ...getTheUserParams}}, {call, put, select});
+    newPayload = User_meCommand.getTheUser_success_reducer(<User_meState>newPayload, getTheUserPayload);
     return newPayload;
   };
 
@@ -48,6 +52,32 @@ export class User_meCommand extends BaseCommand {
 
   /**   成功后 更新状态*/
   static getCurrentUser_success_reducer = (state: User_meState, payload): User_meState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+
+  /**  */
+  static * getTheUser_effect({payload}, {call, put, select}) {
+    const user: User = yield call(User_meApis.getTheUser, payload);
+
+    const newPayload: User_meState = {
+      userArea: {
+        list: user ? [user] : [],
+        ...payload ? payload.areaExtraProps__ : null,
+      },
+      ...payload ? payload.stateExtraProps__ : null,
+    };
+    return newPayload;
+  };
+
+  static getTheUser_success_type(payload) {
+    return {type: "getTheUser_success", payload: payload};
+  }
+
+  /**   成功后 更新状态*/
+  static getTheUser_success_reducer = (state: User_meState, payload): User_meState => {
     return mergeObjects(
       state,
       payload,
@@ -95,7 +125,8 @@ user_meModel.subscriptions.setup = ({dispatch, history}) => {
     }
     let payload = {...RouteUtil.getQuery(listener)} ;
     const getCurrentUserParams = user_meModel.getCurrentUserInitParamsFn ? user_meModel.getCurrentUserInitParamsFn({pathname, match, keys}) : null;
-    payload = {...payload, ...getCurrentUserParams}
+    const getTheUserParams = user_meModel.getTheUserInitParamsFn ? user_meModel.getTheUserInitParamsFn({pathname, match, keys}) : null;
+    payload = {...payload, getCurrentUserParams, getTheUserParams}
     dispatch({
       type: 'user_me/setup',
       payload,
@@ -134,6 +165,16 @@ user_meModel.effects.getCurrentUser = function* ({payload}, {call, put, select})
 
 user_meModel.reducers.getCurrentUser_success = (state: User_meState, {payload}): User_meState => {
   return User_meCommand.getCurrentUser_success_reducer(state, payload);
+};
+
+/**  */
+user_meModel.effects.getTheUser = function* ({payload}, {call, put, select}) {
+  const newPayload = yield User_meCommand.getTheUser_effect({payload}, {call, put, select});
+  yield put(User_meCommand.getTheUser_success_type(newPayload));
+};
+
+user_meModel.reducers.getTheUser_success = (state: User_meState, {payload}): User_meState => {
+  return User_meCommand.getTheUser_success_reducer(state, payload);
 };
 
 /** 修改用户 */

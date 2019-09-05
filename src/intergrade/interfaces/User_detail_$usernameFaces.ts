@@ -30,6 +30,8 @@ export interface User_detail_$usernameInitEffects extends Effects {
   /**  */
   getCurrentUser?: Effect,
   /**  */
+  getTheUser?: Effect,
+  /**  */
   getUserData?: Effect,
   /** 修改用户 */
   update?: Effect,
@@ -41,6 +43,8 @@ interface User_detail_$usernameInitReducers<S extends User_detail_$usernameState
   setup_success?: Reducer<User_detail_$usernameState>,
   /**   成功后 更新状态*/
   getCurrentUser_success?: Reducer<User_detail_$usernameState>,
+  /**   成功后 更新状态*/
+  getTheUser_success?: Reducer<User_detail_$usernameState>,
   /**   成功后 更新状态*/
   getUserData_success?: Reducer<User_detail_$usernameState>,
   /** 修改用户  成功后 更新状态*/
@@ -59,6 +63,7 @@ export interface User_detail_$usernameModel extends IModel<User_detail_$username
   effects?: User_detail_$usernameEffects;
   subscriptions?: User_detail_$usernameSubscriptions;
   getCurrentUserInitParamsFn?: SetupParamsFun;
+  getTheUserInitParamsFn?: SetupParamsFun;
   getUserDataInitParamsFn?: SetupParamsFun;
   getInitState?: () => User_detail_$usernameState;
 }
@@ -107,6 +112,7 @@ export class User_detail_$usernameDispatch {
 
   static setup_effect(
               getCurrentUserInitParams?: {params?: {}, areaExtraProps__?: AreaState<any>, stateExtraProps__?: User_detail_$usernameState},
+              getTheUserInitParams?: {params?: {}, areaExtraProps__?: AreaState<any>, stateExtraProps__?: User_detail_$usernameState},
               getUserDataInitParams?: {params: { username?: string }, areaExtraProps__?: AreaState<any>, stateExtraProps__?: User_detail_$usernameState},
                params?: {}) {
     return {
@@ -114,6 +120,7 @@ export class User_detail_$usernameDispatch {
       payload: {
         ...params,
         getCurrentUserInitParams,
+        getTheUserInitParams,
         getUserDataInitParams,
       }
     }
@@ -123,6 +130,19 @@ export class User_detail_$usernameDispatch {
   static getCurrentUser_effect(params?: {}, areaExtraProps__?: AreaState<any>, stateExtraProps__?: User_detail_$usernameState) {
     return {
       type: user_detail_$usernameInitModel.namespace + '/getCurrentUser',
+      payload: {
+        ...params,
+        areaExtraProps__,
+        stateExtraProps__,
+      }
+    }
+  };
+
+
+  /**  */
+  static getTheUser_effect(params?: {}, areaExtraProps__?: AreaState<any>, stateExtraProps__?: User_detail_$usernameState) {
+    return {
+      type: user_detail_$usernameInitModel.namespace + '/getTheUser',
       payload: {
         ...params,
         areaExtraProps__,

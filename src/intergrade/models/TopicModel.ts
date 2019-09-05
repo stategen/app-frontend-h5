@@ -30,6 +30,62 @@ export class TopicCommand extends BaseCommand {
 
 
   /**  */
+  static * delete_effect({payload}, {call, put, select}) {
+    const result: string = yield call(TopicApis.delete, payload);
+    const oldTopicArea = yield select((_) => _.topic.topicArea);
+    const topics = delateArray(oldTopicArea.list, result ? result : null, "topicId");
+
+    const newPayload: TopicState = {
+      topicArea: {
+        list: topics,
+        ...payload ? payload.areaExtraProps__ : null,
+      },
+      ...payload ? payload.stateExtraProps__ : null,
+    };
+    return newPayload;
+  };
+
+  static delete_success_type(payload) {
+    return {type: "delete_success", payload: payload};
+  }
+
+  /**   成功后 更新状态*/
+  static delete_success_reducer = (state: TopicState, payload): TopicState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+
+  /**  */
+  static * deleteBatch_effect({payload}, {call, put, select}) {
+    const result: string[] = yield call(TopicApis.deleteBatch, payload);
+    const oldTopicArea = yield select((_) => _.topic.topicArea);
+    const topics = delateArray(oldTopicArea.list, result ? result : null, "topicId");
+
+    const newPayload: TopicState = {
+      topicArea: {
+        list: topics,
+        ...payload ? payload.areaExtraProps__ : null,
+      },
+      ...payload ? payload.stateExtraProps__ : null,
+    };
+    return newPayload;
+  };
+
+  static deleteBatch_success_type(payload) {
+    return {type: "deleteBatch_success", payload: payload};
+  }
+
+  /**   成功后 更新状态*/
+  static deleteBatch_success_reducer = (state: TopicState, payload): TopicState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+
+  /**  */
   static * getTopicPageList_effect({payload}, {call, put, select}) {
     const oldTopicArea = yield select((_) => _.topic.topicArea);
     payload = {page: 1, pageSize: 10, ...oldTopicArea.queryRule, ...payload};
@@ -61,6 +117,13 @@ export class TopicCommand extends BaseCommand {
     const totalPages = Math.trunc(pagination.total / (pagination.pageSize || 10)) + 1;
     page = Math.min(page, totalPages)
     payload = {...oldTopicArea.queryRule, page};
+    const newPayload = yield TopicCommand.getTopicPageList_effect({payload}, {call, put, select});
+    return newPayload;
+  }
+
+  static * getTopicPageList_refresh_effect({payload}, {call, put, select}) {
+    const oldTopicArea = yield select((_) => _.topic.topicArea);
+    payload = {...oldTopicArea.queryRule};
     const newPayload = yield TopicCommand.getTopicPageList_effect({payload}, {call, put, select});
     return newPayload;
   }
@@ -146,6 +209,26 @@ topicModel.reducers.setup_success = (state: TopicState, {payload}): TopicState =
 };
 
 /**  */
+topicModel.effects.delete = function* ({payload}, {call, put, select}) {
+  const newPayload = yield TopicCommand.delete_effect({payload}, {call, put, select});
+  yield put(TopicCommand.delete_success_type(newPayload));
+};
+
+topicModel.reducers.delete_success = (state: TopicState, {payload}): TopicState => {
+  return TopicCommand.delete_success_reducer(state, payload);
+};
+
+/**  */
+topicModel.effects.deleteBatch = function* ({payload}, {call, put, select}) {
+  const newPayload = yield TopicCommand.deleteBatch_effect({payload}, {call, put, select});
+  yield put(TopicCommand.deleteBatch_success_type(newPayload));
+};
+
+topicModel.reducers.deleteBatch_success = (state: TopicState, {payload}): TopicState => {
+  return TopicCommand.deleteBatch_success_reducer(state, payload);
+};
+
+/**  */
 topicModel.effects.getTopicPageList = function* ({payload}, {call, put, select}) {
   const newPayload = yield TopicCommand.getTopicPageList_effect({payload}, {call, put, select});
   yield put(TopicCommand.getTopicPageList_success_type(newPayload));
@@ -153,6 +236,11 @@ topicModel.effects.getTopicPageList = function* ({payload}, {call, put, select})
 
 topicModel.effects.getTopicPageList_next = function* ({payload}, {call, put, select}) {
   const newPayload = yield TopicCommand.getTopicPageList_next_effect({payload}, {call, put, select});
+  yield put(TopicCommand.getTopicPageList_success_type(newPayload));
+};
+
+topicModel.effects.getTopicPageList_refresh = function* ({payload}, {call, put, select}) {
+  const newPayload = yield TopicCommand.getTopicPageList_refresh_effect({payload}, {call, put, select});
   yield put(TopicCommand.getTopicPageList_success_type(newPayload));
 };
 
