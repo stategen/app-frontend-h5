@@ -6,10 +6,21 @@
  */
 import {goodsDetailInitModel, GoodsDetailModel, GoodsDetailState} from "../interfaces/GoodsDetailFaces";
 import GoodsDetailApis from "../apis/GoodsDetailApis";
-import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand} from "@utils/DvaUtil";
+import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand, DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE} from "@utils/DvaUtil";
 import RouteUtil from "@utils/RouteUtil";
 import Goods from "../beans/Goods";
 
+export const goodsDetailModel: GoodsDetailModel = goodsDetailInitModel;
+
+/**  */
+goodsDetailModel.effects.getGoodDetailById = function* ({payload}, {call, put, select}) {
+  const newPayload = yield GoodsDetailCommand.getGoodDetailById_effect({payload}, {call, put, select});
+  yield put(GoodsDetailCommand.getGoodDetailById_success_type(newPayload));
+};
+
+goodsDetailModel.reducers.getGoodDetailById_success = (state: GoodsDetailState, {payload}): GoodsDetailState => {
+  return GoodsDetailCommand.getGoodDetailById_success_reducer(state, payload);
+};
 
 export class GoodsDetailCommand extends BaseCommand {
 
@@ -20,9 +31,9 @@ export class GoodsDetailCommand extends BaseCommand {
     const newPayload: GoodsDetailState = {
       goodsArea: {
         list: goods ? [goods] : [],
-        ...payload ? payload.areaExtraProps__ : null,
+        ...payload!.areaExtraProps__,
       },
-      ...payload ? payload.stateExtraProps__ : null,
+      ...payload!.stateExtraProps__,
     };
     return newPayload;
   };
@@ -39,15 +50,3 @@ export class GoodsDetailCommand extends BaseCommand {
     );
   };
 }
-
-export const goodsDetailModel: GoodsDetailModel = goodsDetailInitModel;
-
-/**  */
-goodsDetailModel.effects.getGoodDetailById = function* ({payload}, {call, put, select}) {
-  const newPayload = yield GoodsDetailCommand.getGoodDetailById_effect({payload}, {call, put, select});
-  yield put(GoodsDetailCommand.getGoodDetailById_success_type(newPayload));
-};
-
-goodsDetailModel.reducers.getGoodDetailById_success = (state: GoodsDetailState, {payload}): GoodsDetailState => {
-  return GoodsDetailCommand.getGoodDetailById_success_reducer(state, payload);
-};

@@ -6,141 +6,11 @@
  */
 import {user_detail_$usernameInitModel, User_detail_$usernameModel, User_detail_$usernameState} from "../interfaces/User_detail_$usernameFaces";
 import User_detail_$usernameApis from "../apis/User_detail_$usernameApis";
-import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand} from "@utils/DvaUtil";
+import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand, DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE} from "@utils/DvaUtil";
 import RouteUtil from "@utils/RouteUtil";
 import RoleType from "../enums/RoleType";
 import StatusEnum from "../enums/StatusEnum";
 import User from "../beans/User";
-
-
-export class User_detail_$usernameCommand extends BaseCommand {
-  static * setup_effect({payload}, {call, put, select}) {
-    let newPayload = {};
-    const {getCurrentUserParams = null, getTheUserParams = null, getUserDataParams = null, ...lastParams} = payload || {};
-
-    /**  */
-    const getCurrentUserPayload = yield User_detail_$usernameCommand.getCurrentUser_effect({payload: {...lastParams, ...getCurrentUserParams}}, {call, put, select});
-    newPayload = User_detail_$usernameCommand.getCurrentUser_success_reducer(<User_detail_$usernameState>newPayload, getCurrentUserPayload);
-    /**  */
-    const getTheUserPayload = yield User_detail_$usernameCommand.getTheUser_effect({payload: {...lastParams, ...getTheUserParams}}, {call, put, select});
-    newPayload = User_detail_$usernameCommand.getTheUser_success_reducer(<User_detail_$usernameState>newPayload, getTheUserPayload);
-    /**  */
-    const getUserDataPayload = yield User_detail_$usernameCommand.getUserData_effect({payload: {...lastParams, ...getUserDataParams}}, {call, put, select});
-    newPayload = User_detail_$usernameCommand.getUserData_success_reducer(<User_detail_$usernameState>newPayload, getUserDataPayload);
-    return newPayload;
-  };
-
-  static setup_success_type(payload) {
-    return {type: "setup_success", payload: payload};
-  }
-
-
-  /**  */
-  static * getCurrentUser_effect({payload}, {call, put, select}) {
-    const user: User = yield call(User_detail_$usernameApis.getCurrentUser, payload);
-
-    const newPayload: User_detail_$usernameState = {
-      userArea: {
-        list: user ? [user] : [],
-        ...payload ? payload.areaExtraProps__ : null,
-      },
-      ...payload ? payload.stateExtraProps__ : null,
-    };
-    return newPayload;
-  };
-
-  static getCurrentUser_success_type(payload) {
-    return {type: "getCurrentUser_success", payload: payload};
-  }
-
-  /**   成功后 更新状态*/
-  static getCurrentUser_success_reducer = (state: User_detail_$usernameState, payload): User_detail_$usernameState => {
-    return mergeObjects(
-      state,
-      payload,
-    );
-  };
-
-  /**  */
-  static * getTheUser_effect({payload}, {call, put, select}) {
-    const user: User = yield call(User_detail_$usernameApis.getTheUser, payload);
-
-    const newPayload: User_detail_$usernameState = {
-      userArea: {
-        list: user ? [user] : [],
-        ...payload ? payload.areaExtraProps__ : null,
-      },
-      ...payload ? payload.stateExtraProps__ : null,
-    };
-    return newPayload;
-  };
-
-  static getTheUser_success_type(payload) {
-    return {type: "getTheUser_success", payload: payload};
-  }
-
-  /**   成功后 更新状态*/
-  static getTheUser_success_reducer = (state: User_detail_$usernameState, payload): User_detail_$usernameState => {
-    return mergeObjects(
-      state,
-      payload,
-    );
-  };
-
-  /**  */
-  static * getUserData_effect({payload}, {call, put, select}) {
-    const user: User = yield call(User_detail_$usernameApis.getUserData, payload);
-
-    const newPayload: User_detail_$usernameState = {
-      userArea: {
-        list: user ? [user] : [],
-        ...payload ? payload.areaExtraProps__ : null,
-      },
-      ...payload ? payload.stateExtraProps__ : null,
-    };
-    return newPayload;
-  };
-
-  static getUserData_success_type(payload) {
-    return {type: "getUserData_success", payload: payload};
-  }
-
-  /**   成功后 更新状态*/
-  static getUserData_success_reducer = (state: User_detail_$usernameState, payload): User_detail_$usernameState => {
-    return mergeObjects(
-      state,
-      payload,
-    );
-  };
-
-  /** 修改用户 */
-  static * update_effect({payload}, {call, put, select}) {
-    const user: User = yield call(User_detail_$usernameApis.update, payload);
-    const oldUserArea = yield select((_) => _.user_detail_$username.userArea);
-    const users = updateArray(oldUserArea.list, user ? user : null, "userId");
-
-    const newPayload: User_detail_$usernameState = {
-      userArea: {
-        list: users,
-        ...payload ? payload.areaExtraProps__ : null,
-      },
-      ...payload ? payload.stateExtraProps__ : null,
-    };
-    return newPayload;
-  };
-
-  static update_success_type(payload) {
-    return {type: "update_success", payload: payload};
-  }
-
-  /** 修改用户  成功后 更新状态*/
-  static update_success_reducer = (state: User_detail_$usernameState, payload): User_detail_$usernameState => {
-    return mergeObjects(
-      state,
-      payload,
-    );
-  };
-}
 
 export const user_detail_$usernameModel: User_detail_$usernameModel = user_detail_$usernameInitModel;
 
@@ -229,3 +99,132 @@ user_detail_$usernameModel.effects.update = function* ({payload}, {call, put, se
 user_detail_$usernameModel.reducers.update_success = (state: User_detail_$usernameState, {payload}): User_detail_$usernameState => {
   return User_detail_$usernameCommand.update_success_reducer(state, payload);
 };
+
+export class User_detail_$usernameCommand extends BaseCommand {
+  static * setup_effect({payload}, {call, put, select}) {
+    let newPayload = {};
+    const {getCurrentUserParams = null, getTheUserParams = null, getUserDataParams = null, ...lastParams} = payload || {};
+
+    /**  */
+    const getCurrentUserPayload = yield User_detail_$usernameCommand.getCurrentUser_effect({payload: {...lastParams, ...getCurrentUserParams}}, {call, put, select});
+    newPayload = User_detail_$usernameCommand.getCurrentUser_success_reducer(<User_detail_$usernameState>newPayload, getCurrentUserPayload);
+    /**  */
+    const getTheUserPayload = yield User_detail_$usernameCommand.getTheUser_effect({payload: {...lastParams, ...getTheUserParams}}, {call, put, select});
+    newPayload = User_detail_$usernameCommand.getTheUser_success_reducer(<User_detail_$usernameState>newPayload, getTheUserPayload);
+    /**  */
+    const getUserDataPayload = yield User_detail_$usernameCommand.getUserData_effect({payload: {...lastParams, ...getUserDataParams}}, {call, put, select});
+    newPayload = User_detail_$usernameCommand.getUserData_success_reducer(<User_detail_$usernameState>newPayload, getUserDataPayload);
+    return newPayload;
+  };
+
+  static setup_success_type(payload) {
+    return {type: "setup_success", payload: payload};
+  }
+
+
+  /**  */
+  static * getCurrentUser_effect({payload}, {call, put, select}) {
+    const user: User = yield call(User_detail_$usernameApis.getCurrentUser, payload);
+
+    const newPayload: User_detail_$usernameState = {
+      userArea: {
+        list: user ? [user] : [],
+        ...payload!.areaExtraProps__,
+      },
+      ...payload!.stateExtraProps__,
+    };
+    return newPayload;
+  };
+
+  static getCurrentUser_success_type(payload) {
+    return {type: "getCurrentUser_success", payload: payload};
+  }
+
+  /**   成功后 更新状态*/
+  static getCurrentUser_success_reducer = (state: User_detail_$usernameState, payload): User_detail_$usernameState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+
+  /**  */
+  static * getTheUser_effect({payload}, {call, put, select}) {
+    const user: User = yield call(User_detail_$usernameApis.getTheUser, payload);
+
+    const newPayload: User_detail_$usernameState = {
+      userArea: {
+        list: user ? [user] : [],
+        ...payload!.areaExtraProps__,
+      },
+      ...payload!.stateExtraProps__,
+    };
+    return newPayload;
+  };
+
+  static getTheUser_success_type(payload) {
+    return {type: "getTheUser_success", payload: payload};
+  }
+
+  /**   成功后 更新状态*/
+  static getTheUser_success_reducer = (state: User_detail_$usernameState, payload): User_detail_$usernameState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+
+  /**  */
+  static * getUserData_effect({payload}, {call, put, select}) {
+    const user: User = yield call(User_detail_$usernameApis.getUserData, payload);
+
+    const newPayload: User_detail_$usernameState = {
+      userArea: {
+        list: user ? [user] : [],
+        ...payload!.areaExtraProps__,
+      },
+      ...payload!.stateExtraProps__,
+    };
+    return newPayload;
+  };
+
+  static getUserData_success_type(payload) {
+    return {type: "getUserData_success", payload: payload};
+  }
+
+  /**   成功后 更新状态*/
+  static getUserData_success_reducer = (state: User_detail_$usernameState, payload): User_detail_$usernameState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+
+  /** 修改用户 */
+  static * update_effect({payload}, {call, put, select}) {
+    const user: User = yield call(User_detail_$usernameApis.update, payload);
+    const oldUserArea = yield select((_) => _.user_detail_$username.userArea);
+    const users = updateArray(oldUserArea.list, user, "userId");
+
+    const newPayload: User_detail_$usernameState = {
+      userArea: {
+        list: users,
+        ...payload!.areaExtraProps__,
+      },
+      ...payload!.stateExtraProps__,
+    };
+    return newPayload;
+  };
+
+  static update_success_type(payload) {
+    return {type: "update_success", payload: payload};
+  }
+
+  /** 修改用户  成功后 更新状态*/
+  static update_success_reducer = (state: User_detail_$usernameState, payload): User_detail_$usernameState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+}

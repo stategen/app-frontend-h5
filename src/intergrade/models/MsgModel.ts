@@ -6,11 +6,10 @@
  */
 import {msgInitModel, MsgModel, MsgState} from "../interfaces/MsgFaces";
 import MsgApis from "../apis/MsgApis";
-import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand} from "@utils/DvaUtil";
+import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand, DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE} from "@utils/DvaUtil";
 import RouteUtil from "@utils/RouteUtil";
 
+export const msgModel: MsgModel = msgInitModel;
 
 export class MsgCommand extends BaseCommand {
 }
-
-export const msgModel: MsgModel = msgInitModel;

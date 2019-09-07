@@ -6,52 +6,9 @@
  */
 import {categoryInitModel, CategoryModel, CategoryState} from "../interfaces/CategoryFaces";
 import CategoryApis from "../apis/CategoryApis";
-import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand} from "@utils/DvaUtil";
+import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand, DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE} from "@utils/DvaUtil";
 import RouteUtil from "@utils/RouteUtil";
 import Category from "../beans/Category";
-
-
-export class CategoryCommand extends BaseCommand {
-  static * setup_effect({payload}, {call, put, select}) {
-    let newPayload = {};
-
-    /**  */
-    const getCategoryPayload = yield CategoryCommand.getCategory_effect({payload}, {call, put, select});
-    newPayload = CategoryCommand.getCategory_success_reducer(<CategoryState>newPayload, getCategoryPayload);
-    return newPayload;
-  };
-
-  static setup_success_type(payload) {
-    return {type: "setup_success", payload: payload};
-  }
-
-
-  /**  */
-  static * getCategory_effect({payload}, {call, put, select}) {
-    const categorys: Category[] = yield call(CategoryApis.getCategory, payload);
-
-    const newPayload: CategoryState = {
-      categoryArea: {
-        list: categorys ? categorys : [],
-        ...payload ? payload.areaExtraProps__ : null,
-      },
-      ...payload ? payload.stateExtraProps__ : null,
-    };
-    return newPayload;
-  };
-
-  static getCategory_success_type(payload) {
-    return {type: "getCategory_success", payload: payload};
-  }
-
-  /**   成功后 更新状态*/
-  static getCategory_success_reducer = (state: CategoryState, payload): CategoryState => {
-    return mergeObjects(
-      state,
-      payload,
-    );
-  };
-}
 
 export const categoryModel: CategoryModel = categoryInitModel;
 
@@ -105,3 +62,45 @@ categoryModel.effects.getCategory = function* ({payload}, {call, put, select}) {
 categoryModel.reducers.getCategory_success = (state: CategoryState, {payload}): CategoryState => {
   return CategoryCommand.getCategory_success_reducer(state, payload);
 };
+
+export class CategoryCommand extends BaseCommand {
+  static * setup_effect({payload}, {call, put, select}) {
+    let newPayload = {};
+
+    /**  */
+    const getCategoryPayload = yield CategoryCommand.getCategory_effect({payload}, {call, put, select});
+    newPayload = CategoryCommand.getCategory_success_reducer(<CategoryState>newPayload, getCategoryPayload);
+    return newPayload;
+  };
+
+  static setup_success_type(payload) {
+    return {type: "setup_success", payload: payload};
+  }
+
+
+  /**  */
+  static * getCategory_effect({payload}, {call, put, select}) {
+    const categorys: Category[] = yield call(CategoryApis.getCategory, payload);
+
+    const newPayload: CategoryState = {
+      categoryArea: {
+        list: categorys ? categorys : [],
+        ...payload!.areaExtraProps__,
+      },
+      ...payload!.stateExtraProps__,
+    };
+    return newPayload;
+  };
+
+  static getCategory_success_type(payload) {
+    return {type: "getCategory_success", payload: payload};
+  }
+
+  /**   成功后 更新状态*/
+  static getCategory_success_reducer = (state: CategoryState, payload): CategoryState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+}

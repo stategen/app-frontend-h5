@@ -6,11 +6,22 @@
  */
 import {topic_publishInitModel, Topic_publishModel, Topic_publishState} from "../interfaces/Topic_publishFaces";
 import Topic_publishApis from "../apis/Topic_publishApis";
-import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand} from "@utils/DvaUtil";
+import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand, DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE} from "@utils/DvaUtil";
 import RouteUtil from "@utils/RouteUtil";
 import Topic from "../beans/Topic";
 import TopicType from "../enums/TopicType";
 
+export const topic_publishModel: Topic_publishModel = topic_publishInitModel;
+
+/**  */
+topic_publishModel.effects.saveTopic = function* ({payload}, {call, put, select}) {
+  const newPayload = yield Topic_publishCommand.saveTopic_effect({payload}, {call, put, select});
+  yield put(Topic_publishCommand.saveTopic_success_type(newPayload));
+};
+
+topic_publishModel.reducers.saveTopic_success = (state: Topic_publishState, {payload}): Topic_publishState => {
+  return Topic_publishCommand.saveTopic_success_reducer(state, payload);
+};
 
 export class Topic_publishCommand extends BaseCommand {
 
@@ -21,9 +32,9 @@ export class Topic_publishCommand extends BaseCommand {
     const newPayload: Topic_publishState = {
       topicArea: {
         list: topic ? [topic] : [],
-        ...payload ? payload.areaExtraProps__ : null,
+        ...payload!.areaExtraProps__,
       },
-      ...payload ? payload.stateExtraProps__ : null,
+      ...payload!.stateExtraProps__,
     };
     return newPayload;
   };
@@ -40,15 +51,3 @@ export class Topic_publishCommand extends BaseCommand {
     );
   };
 }
-
-export const topic_publishModel: Topic_publishModel = topic_publishInitModel;
-
-/**  */
-topic_publishModel.effects.saveTopic = function* ({payload}, {call, put, select}) {
-  const newPayload = yield Topic_publishCommand.saveTopic_effect({payload}, {call, put, select});
-  yield put(Topic_publishCommand.saveTopic_success_type(newPayload));
-};
-
-topic_publishModel.reducers.saveTopic_success = (state: Topic_publishState, {payload}): Topic_publishState => {
-  return Topic_publishCommand.saveTopic_success_reducer(state, payload);
-};

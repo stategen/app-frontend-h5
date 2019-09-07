@@ -6,164 +6,12 @@
  */
 import {topicInitModel, TopicModel, TopicState} from "../interfaces/TopicFaces";
 import TopicApis from "../apis/TopicApis";
-import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand} from "@utils/DvaUtil";
+import {updateArray, delateArray, mergeObjects, AreaState, BaseCommand, DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE} from "@utils/DvaUtil";
 import RouteUtil from "@utils/RouteUtil";
 import AntdPageList from "../beans/AntdPageList";
 import {PaginationProps} from 'antd/es/pagination';
 import Topic from "../beans/Topic";
 import TopicType from "../enums/TopicType";
-
-
-export class TopicCommand extends BaseCommand {
-  static * setup_effect({payload}, {call, put, select}) {
-    let newPayload = {};
-
-    /**  */
-    const getTopicPageListPayload = yield TopicCommand.getTopicPageList_effect({payload}, {call, put, select});
-    newPayload = TopicCommand.getTopicPageList_success_reducer(<TopicState>newPayload, getTopicPageListPayload);
-    return newPayload;
-  };
-
-  static setup_success_type(payload) {
-    return {type: "setup_success", payload: payload};
-  }
-
-
-  /**  */
-  static * delete_effect({payload}, {call, put, select}) {
-    const result: string = yield call(TopicApis.delete, payload);
-    const oldTopicArea = yield select((_) => _.topic.topicArea);
-    const topics = delateArray(oldTopicArea.list, result ? result : null, "topicId");
-
-    const newPayload: TopicState = {
-      topicArea: {
-        list: topics,
-        ...payload ? payload.areaExtraProps__ : null,
-      },
-      ...payload ? payload.stateExtraProps__ : null,
-    };
-    return newPayload;
-  };
-
-  static delete_success_type(payload) {
-    return {type: "delete_success", payload: payload};
-  }
-
-  /**   成功后 更新状态*/
-  static delete_success_reducer = (state: TopicState, payload): TopicState => {
-    return mergeObjects(
-      state,
-      payload,
-    );
-  };
-
-  /**  */
-  static * deleteBatch_effect({payload}, {call, put, select}) {
-    const result: string[] = yield call(TopicApis.deleteBatch, payload);
-    const oldTopicArea = yield select((_) => _.topic.topicArea);
-    const topics = delateArray(oldTopicArea.list, result ? result : null, "topicId");
-
-    const newPayload: TopicState = {
-      topicArea: {
-        list: topics,
-        ...payload ? payload.areaExtraProps__ : null,
-      },
-      ...payload ? payload.stateExtraProps__ : null,
-    };
-    return newPayload;
-  };
-
-  static deleteBatch_success_type(payload) {
-    return {type: "deleteBatch_success", payload: payload};
-  }
-
-  /**   成功后 更新状态*/
-  static deleteBatch_success_reducer = (state: TopicState, payload): TopicState => {
-    return mergeObjects(
-      state,
-      payload,
-    );
-  };
-
-  /**  */
-  static * getTopicPageList_effect({payload}, {call, put, select}) {
-    const oldTopicArea = yield select((_) => _.topic.topicArea);
-    payload = {page: 1, pageSize: 10, ...oldTopicArea.queryRule, ...payload};
-    const topicPageList: AntdPageList<Topic> = yield call(TopicApis.getTopicPageList, payload);
-    const pagination = topicPageList ? topicPageList.pagination : null;
-    const topics = updateArray(oldTopicArea.list, topicPageList ? topicPageList.list : null, "topicId");
-
-    const newPayload: TopicState = {
-      topicArea: {
-        list: topics,
-        pagination,
-        queryRule: payload,
-        ...payload ? payload.areaExtraProps__ : null,
-      },
-      ...payload ? payload.stateExtraProps__ : null,
-    };
-    return newPayload;
-  };
-
-  static getTopicPageList_success_type(payload) {
-    return {type: "getTopicPageList_success", payload: payload};
-  }
-
-  static * getTopicPageList_next_effect({payload}, {call, put, select}) {
-    const oldTopicArea = yield select((_) => _.topic.topicArea);
-    const pagination = oldTopicArea.pagination;
-    let page = pagination.current;
-    page = (page ? page : 0) + 1;
-    const totalPages = Math.trunc(pagination.total / (pagination.pageSize || 10)) + 1;
-    page = Math.min(page, totalPages)
-    payload = {...oldTopicArea.queryRule, page};
-    const newPayload = yield TopicCommand.getTopicPageList_effect({payload}, {call, put, select});
-    return newPayload;
-  }
-
-  static * getTopicPageList_refresh_effect({payload}, {call, put, select}) {
-    const oldTopicArea = yield select((_) => _.topic.topicArea);
-    payload = {...oldTopicArea.queryRule};
-    const newPayload = yield TopicCommand.getTopicPageList_effect({payload}, {call, put, select});
-    return newPayload;
-  }
-
-  /**   成功后 更新状态*/
-  static getTopicPageList_success_reducer = (state: TopicState, payload): TopicState => {
-    return mergeObjects(
-      state,
-      payload,
-    );
-  };
-
-  /**  */
-  static * update_effect({payload}, {call, put, select}) {
-    const topic: Topic = yield call(TopicApis.update, payload);
-    const oldTopicArea = yield select((_) => _.topic.topicArea);
-    const topics = updateArray(oldTopicArea.list, topic ? topic : null, "topicId");
-
-    const newPayload: TopicState = {
-      topicArea: {
-        list: topics,
-        ...payload ? payload.areaExtraProps__ : null,
-      },
-      ...payload ? payload.stateExtraProps__ : null,
-    };
-    return newPayload;
-  };
-
-  static update_success_type(payload) {
-    return {type: "update_success", payload: payload};
-  }
-
-  /**   成功后 更新状态*/
-  static update_success_reducer = (state: TopicState, payload): TopicState => {
-    return mergeObjects(
-      state,
-      payload,
-    );
-  };
-}
 
 export const topicModel: TopicModel = topicInitModel;
 
@@ -257,3 +105,154 @@ topicModel.effects.update = function* ({payload}, {call, put, select}) {
 topicModel.reducers.update_success = (state: TopicState, {payload}): TopicState => {
   return TopicCommand.update_success_reducer(state, payload);
 };
+
+export class TopicCommand extends BaseCommand {
+  static * setup_effect({payload}, {call, put, select}) {
+    let newPayload = {};
+
+    /**  */
+    const getTopicPageListPayload = yield TopicCommand.getTopicPageList_effect({payload}, {call, put, select});
+    newPayload = TopicCommand.getTopicPageList_success_reducer(<TopicState>newPayload, getTopicPageListPayload);
+    return newPayload;
+  };
+
+  static setup_success_type(payload) {
+    return {type: "setup_success", payload: payload};
+  }
+
+
+  /**  */
+  static * delete_effect({payload}, {call, put, select}) {
+    const result: string = yield call(TopicApis.delete, payload);
+    const oldTopicArea = yield select((_) => _.topic.topicArea);
+    const topics = delateArray(oldTopicArea.list, result, "topicId");
+
+    const newPayload: TopicState = {
+      topicArea: {
+        list: topics,
+        ...payload!.areaExtraProps__,
+      },
+      ...payload!.stateExtraProps__,
+    };
+    return newPayload;
+  };
+
+  static delete_success_type(payload) {
+    return {type: "delete_success", payload: payload};
+  }
+
+  /**   成功后 更新状态*/
+  static delete_success_reducer = (state: TopicState, payload): TopicState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+
+  /**  */
+  static * deleteBatch_effect({payload}, {call, put, select}) {
+    const result: string[] = yield call(TopicApis.deleteBatch, payload);
+    const oldTopicArea = yield select((_) => _.topic.topicArea);
+    const topics = delateArray(oldTopicArea.list, result, "topicId");
+
+    const newPayload: TopicState = {
+      topicArea: {
+        list: topics,
+        ...payload!.areaExtraProps__,
+      },
+      ...payload!.stateExtraProps__,
+    };
+    return newPayload;
+  };
+
+  static deleteBatch_success_type(payload) {
+    return {type: "deleteBatch_success", payload: payload};
+  }
+
+  /**   成功后 更新状态*/
+  static deleteBatch_success_reducer = (state: TopicState, payload): TopicState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+
+  /**  */
+  static * getTopicPageList_effect({payload}, {call, put, select}) {
+    const oldTopicArea = yield select((_) => _.topic.topicArea);
+    payload = {page: DEFAULT_PAGE_NUM, pageSize: DEFAULT_PAGE_SIZE, ...payload};
+    const topicPageList: AntdPageList<Topic> = yield call(TopicApis.getTopicPageList, payload);
+    const pagination =topicPageList!.pagination;
+    const topics = updateArray(oldTopicArea.list, topicPageList!.list, "topicId");
+
+    const newPayload: TopicState = {
+      topicArea: {
+        list: topics,
+        pagination,
+        queryRule: payload,
+        ...payload!.areaExtraProps__,
+      },
+      ...payload!.stateExtraProps__,
+    };
+    return newPayload;
+  };
+
+  static getTopicPageList_success_type(payload) {
+    return {type: "getTopicPageList_success", payload: payload};
+  }
+
+  static * getTopicPageList_next_effect({payload}, {call, put, select}) {
+    const oldTopicArea = yield select((_) => _.topic.topicArea);
+    const pagination = oldTopicArea!.pagination;
+    let page = pagination!.current;
+    page = (page || 0) + 1;
+    const totalPages = Math.trunc(pagination!.total / (pagination!.pageSize || 10)) + 1;
+    page = Math.min(page, totalPages)
+    payload = {...oldTopicArea!.queryRule, page};
+    const newPayload = yield TopicCommand.getTopicPageList_effect({payload}, {call, put, select});
+    return newPayload;
+  }
+
+  static * getTopicPageList_refresh_effect({payload}, {call, put, select}) {
+    const oldTopicArea = yield select((_) => _.topic.topicArea);
+    payload = {...oldTopicArea!.queryRule};
+    const newPayload = yield TopicCommand.getTopicPageList_effect({payload}, {call, put, select});
+    return newPayload;
+  }
+
+  /**   成功后 更新状态*/
+  static getTopicPageList_success_reducer = (state: TopicState, payload): TopicState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+
+  /**  */
+  static * update_effect({payload}, {call, put, select}) {
+    const topic: Topic = yield call(TopicApis.update, payload);
+    const oldTopicArea = yield select((_) => _.topic.topicArea);
+    const topics = updateArray(oldTopicArea.list, topic, "topicId");
+
+    const newPayload: TopicState = {
+      topicArea: {
+        list: topics,
+        ...payload!.areaExtraProps__,
+      },
+      ...payload!.stateExtraProps__,
+    };
+    return newPayload;
+  };
+
+  static update_success_type(payload) {
+    return {type: "update_success", payload: payload};
+  }
+
+  /**   成功后 更新状态*/
+  static update_success_reducer = (state: TopicState, payload): TopicState => {
+    return mergeObjects(
+      state,
+      payload,
+    );
+  };
+}
