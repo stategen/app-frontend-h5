@@ -9,7 +9,7 @@ import {Net, Method, MediaType, RequestInitEx} from "@utils/Net";
 import RoleType from "../enums/RoleType";
 import StatusEnum from "../enums/StatusEnum";
 import User from "../beans/User";
-import {apiUrlKey} from "../configs/tradeApp-config";
+import {tradeAppBaseUrlKey} from "../configs/tradeApp-config";
 
 export default class User_meApis {
   /**
@@ -18,7 +18,7 @@ export default class User_meApis {
    */
   static getCurrentUser(params?: {}): User {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/user/getCurrentUser';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = params;
@@ -32,7 +32,7 @@ export default class User_meApis {
    */
   static getTheUser(params?: {}): User {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/user/getTheUser';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = params;
@@ -46,7 +46,7 @@ export default class User_meApis {
    */
   static update(params: { hoppyIds?: number[], cascaderPostAddressIds?: number[], username?: string, password?: string, roleType?: RoleType, name?: string, nickName?: string, age?: number, address?: string, avatarImgId?: string, email?: string, valiDatetime?: Date, birthdayDate?: Date, workTime?: Date, provinceId?: string, cityId?: string, status?: StatusEnum, grade?: number, sex?: boolean, postAddressId?: string, userId?: string }): User {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/user/update';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = params;

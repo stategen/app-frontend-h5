@@ -10,7 +10,7 @@ import AntdPageList from "../beans/AntdPageList";
 import {PaginationProps} from 'antd/es/pagination';
 import Topic from "../beans/Topic";
 import TopicType from "../enums/TopicType";
-import {apiUrlKey} from "../configs/tradeApp-config";
+import {tradeAppBaseUrlKey} from "../configs/tradeApp-config";
 
 export default class TopicApis {
   /**
@@ -19,7 +19,7 @@ export default class TopicApis {
    */
   static delete(params: { topicId?: string } | string): string {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/topic/delete';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = (params instanceof Object && !Array.isArray(params)) ? params : {topicId: params};
@@ -33,7 +33,7 @@ export default class TopicApis {
    */
   static deleteBatch(params: { topicIds?: string[] } | string[]): string[] {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/topic/deleteBatch';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = (params instanceof Object && !Array.isArray(params)) ? params : {topicIds: params};
@@ -47,7 +47,7 @@ export default class TopicApis {
    */
   static getTopicPageList(params: { topicType?: TopicType, mdrender?: boolean, page?: number, pageSize?: number }): AntdPageList<Topic> {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/topic/getTopicPageList';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = params;
@@ -61,7 +61,7 @@ export default class TopicApis {
    */
   static update(params: { authorId?: string, topicType?: string, content?: string, title?: string, lastReplyAt?: string, good?: string, top?: string, visitCount?: number, createAt?: string, testTimestamp?: Date, testDatetime?: Date, testDate?: Date, testTime?: Date, topicId?: string }): Topic {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/topic/update';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = params;

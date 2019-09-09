@@ -241,19 +241,6 @@ namespace HomeAdvertiseColumns {
     },
   } as ColumnConfig<HomeAdvertise>;
 
-  /** tO_PLACE  */
-  export const tO_PLACE = {
-    key: 'tO_PLACE',
-    dataIndex: 'tO_PLACE',
-    title: 'tO_PLACE',
-    renderColumn: UIColumns.InputRender,
-    config: {
-    },
-    render: (text: any, record: HomeAdvertise, index: number) =>{
-      return tO_PLACE.renderColumn(record, null, text, index, tO_PLACE);
-    },
-  } as ColumnConfig<HomeAdvertise>;
-
   /** pICTURE_ADDRESS  */
   export const pICTURE_ADDRESS = {
     key: 'pICTURE_ADDRESS',
@@ -267,6 +254,19 @@ namespace HomeAdvertiseColumns {
     },
   } as ColumnConfig<HomeAdvertise>;
 
+  /** tO_PLACE  */
+  export const tO_PLACE = {
+    key: 'tO_PLACE',
+    dataIndex: 'tO_PLACE',
+    title: 'tO_PLACE',
+    renderColumn: UIColumns.InputRender,
+    config: {
+    },
+    render: (text: any, record: HomeAdvertise, index: number) =>{
+      return tO_PLACE.renderColumn(record, null, text, index, tO_PLACE);
+    },
+  } as ColumnConfig<HomeAdvertise>;
+
 
   export const renderColumns = {
     homeAdvId,
@@ -276,8 +276,8 @@ namespace HomeAdvertiseColumns {
     pictureAddress,
     toPlace,
     urlType,
-    tO_PLACE,
     pICTURE_ADDRESS,
+    tO_PLACE,
   }
 
 }

@@ -8,7 +8,7 @@ import {Net, Method, MediaType, RequestInitEx} from "@utils/Net";
 
 import Topic from "../beans/Topic";
 import TopicType from "../enums/TopicType";
-import {apiUrlKey} from "../configs/tradeApp-config";
+import {tradeAppBaseUrlKey} from "../configs/tradeApp-config";
 
 export default class Topic_publishApis {
   /**
@@ -17,7 +17,7 @@ export default class Topic_publishApis {
    */
   static saveTopic(params: { topicId?: string, topicType?: TopicType, content?: string, title?: string }): Topic {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/topic/saveTopic';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = params;

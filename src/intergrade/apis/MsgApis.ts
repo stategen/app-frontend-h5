@@ -6,7 +6,7 @@
  */
 import {Net, Method, MediaType, RequestInitEx} from "@utils/Net";
 
-import {apiUrlKey} from "../configs/tradeApp-config";
+import {tradeAppBaseUrlKey} from "../configs/tradeApp-config";
 
 export default class MsgApis {
 }

@@ -7,7 +7,7 @@
 import {Net, Method, MediaType, RequestInitEx} from "@utils/Net";
 
 import Category from "../beans/Category";
-import {apiUrlKey} from "../configs/tradeApp-config";
+import {tradeAppBaseUrlKey} from "../configs/tradeApp-config";
 
 export default class CategoryApis {
   /**
@@ -16,7 +16,7 @@ export default class CategoryApis {
    */
   static getCategory(params?: {}): Category[] {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/category/getCategory';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = params;

@@ -211,19 +211,6 @@ namespace AdvertisePictureColumns {
     },
   } as ColumnConfig<AdvertisePicture>;
 
-  /** tO_PLACE  */
-  export const tO_PLACE = {
-    key: 'tO_PLACE',
-    dataIndex: 'tO_PLACE',
-    title: 'tO_PLACE',
-    renderColumn: UIColumns.InputRender,
-    config: {
-    },
-    render: (text: any, record: AdvertisePicture, index: number) =>{
-      return tO_PLACE.renderColumn(record, null, text, index, tO_PLACE);
-    },
-  } as ColumnConfig<AdvertisePicture>;
-
   /** pICTURE_ADDRESS  */
   export const pICTURE_ADDRESS = {
     key: 'pICTURE_ADDRESS',
@@ -237,6 +224,19 @@ namespace AdvertisePictureColumns {
     },
   } as ColumnConfig<AdvertisePicture>;
 
+  /** tO_PLACE  */
+  export const tO_PLACE = {
+    key: 'tO_PLACE',
+    dataIndex: 'tO_PLACE',
+    title: 'tO_PLACE',
+    renderColumn: UIColumns.InputRender,
+    config: {
+    },
+    render: (text: any, record: AdvertisePicture, index: number) =>{
+      return tO_PLACE.renderColumn(record, null, text, index, tO_PLACE);
+    },
+  } as ColumnConfig<AdvertisePicture>;
+
 
   export const renderColumns = {
     advertiseId,
@@ -245,8 +245,8 @@ namespace AdvertisePictureColumns {
     urlType,
     createTime,
     updateTime,
-    tO_PLACE,
     pICTURE_ADDRESS,
+    tO_PLACE,
   }
 
 }

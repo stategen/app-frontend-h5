@@ -56,11 +56,11 @@ export default interface AdvertisePicture extends Bean {
   /** 更新时间Max */
   updateTimeMax?: Date;
 
-  /** tO_PLACE */
-  tO_PLACE?: string;
-
   /** pICTURE_ADDRESS */
   pICTURE_ADDRESS?: string;
+
+  /** tO_PLACE */
+  tO_PLACE?: string;
 
 }
 

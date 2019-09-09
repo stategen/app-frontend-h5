@@ -10,7 +10,7 @@ import PageList from "../beans/PageList";
 import {PaginationProps} from 'antd/es/pagination';
 import Topic from "../beans/Topic";
 import TopicReply from "../beans/TopicReply";
-import {apiUrlKey} from "../configs/tradeApp-config";
+import {tradeAppBaseUrlKey} from "../configs/tradeApp-config";
 
 export default class Topic_detail_$topicIdApis {
   /**
@@ -19,7 +19,7 @@ export default class Topic_detail_$topicIdApis {
    */
   static PostReply(params: { topicId: string, replyId?: string, authorId?: string, content?: string, parentReplyId?: string }): TopicReply {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/topic/:topicId/postReply';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = params;
@@ -33,7 +33,7 @@ export default class Topic_detail_$topicIdApis {
    */
   static getTopicDetail(params: { topicId: string } | string): Topic {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/topic/:topicId';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = (params instanceof Object && !Array.isArray(params)) ? params : {topicId: params};
@@ -47,7 +47,7 @@ export default class Topic_detail_$topicIdApis {
    */
   static getTopicReplyPageList(params: { topicId: string, page?: number, pageSize?: number }): PageList<TopicReply> {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/topic/:topicId/getReplies';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = params;
@@ -61,7 +61,7 @@ export default class Topic_detail_$topicIdApis {
    */
   static replyUp(params: { replyId: string } | string): TopicReply {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/topic/reply/:replyId';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = (params instanceof Object && !Array.isArray(params)) ? params : {replyId: params};

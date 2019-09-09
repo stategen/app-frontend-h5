@@ -7,7 +7,7 @@
 import {Net, Method, MediaType, RequestInitEx} from "@utils/Net";
 
 import Goods from "../beans/Goods";
-import {apiUrlKey} from "../configs/tradeApp-config";
+import {tradeAppBaseUrlKey} from "../configs/tradeApp-config";
 
 export default class GoodsDetailApis {
   /**
@@ -16,7 +16,7 @@ export default class GoodsDetailApis {
    */
   static getGoodDetailById(params: { goodsId?: string } | string): Goods {
     let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = apiUrlKey;
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/goodsDetail/getGoodDetailById';
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = (params instanceof Object && !Array.isArray(params)) ? params : {goodsId: params};
