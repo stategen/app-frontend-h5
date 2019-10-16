@@ -59,7 +59,7 @@ export class GoodsCommand extends BaseCommand {
     const pagination = oldGoodsArea!.pagination;
     let page = pagination!.current;
     page = (page || 0) + 1;
-    const totalPages = Math.trunc(pagination!.total / (pagination!.pageSize || 10)) + 1;
+    const totalPages = Math.trunc(pagination!.total / (pagination!.pageSize || DEFAULT_PAGE_SIZE)) + 1;
     page = Math.min(page, totalPages)
     payload = {...oldGoodsArea!.queryRule, page};
     const newPayload = yield GoodsCommand.getMallGoods_effect({payload}, {call, put, select});
