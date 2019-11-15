@@ -10,6 +10,36 @@ import UIColumns from "@utils/UIColumns";
 
 namespace CategorySubColumns {
 
+  /** categoryId  */
+  export const categoryId = {
+    key: 'categoryId',
+    dataIndex: 'categoryId',
+    title: 'categoryId',
+    renderColumn: UIColumns.InputRender,
+    config: {
+      rules: [
+        {
+          max: 64,
+          message: "最大不能超过{max}",
+        },
+      ],
+    },
+    render: (text: any, record: CategorySub, index: number) =>{
+      return categoryId.renderColumn(record, null, text, index, categoryId);
+    },
+  } as ColumnConfig<CategorySub>;
+
+  /** categoryId s  */
+  export const categoryIds = {
+    key: 'categoryIds',
+    dataIndex: 'categoryIds',
+    title: 'categoryId',
+    noJson: true,
+    isArray: true,
+    config: {
+    },
+  } as ColumnConfig<CategorySub>;
+
   /** categorySubId  */
   export const categorySubId = {
     key: 'categorySubId',
@@ -30,41 +60,14 @@ namespace CategorySubColumns {
     },
   } as ColumnConfig<CategorySub>;
 
-  /** categoryId  */
-  export const categoryId = {
-    key: 'categoryId',
-    dataIndex: 'categoryId',
-    title: 'categoryId',
-    renderColumn: UIColumns.InputRender,
+  /** categorySubId s  */
+  export const categorySubIds = {
+    key: 'categorySubIds',
+    dataIndex: 'categorySubIds',
+    title: 'categorySubId',
+    noJson: true,
+    isArray: true,
     config: {
-      rules: [
-        {
-          max: 64,
-          message: "最大不能超过{max}",
-        },
-      ],
-    },
-    render: (text: any, record: CategorySub, index: number) =>{
-      return categoryId.renderColumn(record, null, text, index, categoryId);
-    },
-  } as ColumnConfig<CategorySub>;
-
-  /** subName  */
-  export const subName = {
-    key: 'subName',
-    dataIndex: 'subName',
-    title: 'subName',
-    renderColumn: UIColumns.InputRender,
-    config: {
-      rules: [
-        {
-          max: 255,
-          message: "最大不能超过{max}",
-        },
-      ],
-    },
-    render: (text: any, record: CategorySub, index: number) =>{
-      return subName.renderColumn(record, null, text, index, subName);
     },
   } as ColumnConfig<CategorySub>;
 
@@ -88,6 +91,16 @@ namespace CategorySubColumns {
     },
   } as ColumnConfig<CategorySub>;
 
+  /** commentsLike  */
+  export const commentsLike = {
+    key: 'commentsLike',
+    dataIndex: 'commentsLike',
+    title: 'commentsLike',
+    noJson: true,
+    config: {
+    },
+  } as ColumnConfig<CategorySub>;
+
   /** 创建时间  TIMESTAMP*/
   export const createTime = {
     key: 'createTime',
@@ -101,6 +114,73 @@ namespace CategorySubColumns {
     },
     render: (text: any, record: CategorySub, index: number) =>{
       return createTime.renderColumn(record, null, text, index, createTime);
+    },
+  } as ColumnConfig<CategorySub>;
+
+  /** 创建时间Max  TIMESTAMP*/
+  export const createTimeMax = {
+    key: 'createTimeMax',
+    dataIndex: 'createTimeMax',
+    title: '创建时间Max',
+    noJson: true,
+    temporalType: TemporalType.TIMESTAMP,
+    format: TIMESTAMP_FORMAT,
+    config: {
+    },
+  } as ColumnConfig<CategorySub>;
+
+  /** 创建时间Min  TIMESTAMP*/
+  export const createTimeMin = {
+    key: 'createTimeMin',
+    dataIndex: 'createTimeMin',
+    title: '创建时间Min',
+    noJson: true,
+    temporalType: TemporalType.TIMESTAMP,
+    format: TIMESTAMP_FORMAT,
+    config: {
+    },
+  } as ColumnConfig<CategorySub>;
+
+  /** 是否删除(0:正常，1删除)  */
+  export const deleteFlag = {
+    key: 'deleteFlag',
+    dataIndex: 'deleteFlag',
+    title: '是否删除(0:正常',
+    renderColumn: UIColumns.InputRender,
+    hidden: true,
+    config: {
+    },
+    render: (text: any, record: CategorySub, index: number) =>{
+      return deleteFlag.renderColumn(record, null, text, index, deleteFlag);
+    },
+  } as ColumnConfig<CategorySub>;
+
+  /** subName  */
+  export const subName = {
+    key: 'subName',
+    dataIndex: 'subName',
+    title: 'subName',
+    renderColumn: UIColumns.InputRender,
+    config: {
+      rules: [
+        {
+          max: 255,
+          message: "最大不能超过{max}",
+        },
+      ],
+    },
+    render: (text: any, record: CategorySub, index: number) =>{
+      return subName.renderColumn(record, null, text, index, subName);
+    },
+  } as ColumnConfig<CategorySub>;
+
+  /** subNameLike  */
+  export const subNameLike = {
+    key: 'subNameLike',
+    dataIndex: 'subNameLike',
+    title: 'subNameLike',
+    noJson: true,
+    config: {
     },
   } as ColumnConfig<CategorySub>;
 
@@ -120,79 +200,11 @@ namespace CategorySubColumns {
     },
   } as ColumnConfig<CategorySub>;
 
-  /** 是否删除(0:正常，1删除)  */
-  export const deleteFlag = {
-    key: 'deleteFlag',
-    dataIndex: 'deleteFlag',
-    title: '是否删除(0:正常',
-    renderColumn: UIColumns.InputRender,
-    hidden: true,
-    config: {
-    },
-    render: (text: any, record: CategorySub, index: number) =>{
-      return deleteFlag.renderColumn(record, null, text, index, deleteFlag);
-    },
-  } as ColumnConfig<CategorySub>;
-
-  /** categorySubId s  */
-  export const categorySubIds = {
-    key: 'categorySubIds',
-    dataIndex: 'categorySubIds',
-    title: 'categorySubId',
-    noJson: true,
-    isArray: true,
-    config: {
-    },
-  } as ColumnConfig<CategorySub>;
-
-  /** categoryId s  */
-  export const categoryIds = {
-    key: 'categoryIds',
-    dataIndex: 'categoryIds',
-    title: 'categoryId',
-    noJson: true,
-    isArray: true,
-    config: {
-    },
-  } as ColumnConfig<CategorySub>;
-
-  /** subNameLike  */
-  export const subNameLike = {
-    key: 'subNameLike',
-    dataIndex: 'subNameLike',
-    title: 'subNameLike',
-    noJson: true,
-    config: {
-    },
-  } as ColumnConfig<CategorySub>;
-
-  /** commentsLike  */
-  export const commentsLike = {
-    key: 'commentsLike',
-    dataIndex: 'commentsLike',
-    title: 'commentsLike',
-    noJson: true,
-    config: {
-    },
-  } as ColumnConfig<CategorySub>;
-
-  /** 创建时间Min  TIMESTAMP*/
-  export const createTimeMin = {
-    key: 'createTimeMin',
-    dataIndex: 'createTimeMin',
-    title: '创建时间Min',
-    noJson: true,
-    temporalType: TemporalType.TIMESTAMP,
-    format: TIMESTAMP_FORMAT,
-    config: {
-    },
-  } as ColumnConfig<CategorySub>;
-
-  /** 创建时间Max  TIMESTAMP*/
-  export const createTimeMax = {
-    key: 'createTimeMax',
-    dataIndex: 'createTimeMax',
-    title: '创建时间Max',
+  /** 更新时间Max  TIMESTAMP*/
+  export const updateTimeMax = {
+    key: 'updateTimeMax',
+    dataIndex: 'updateTimeMax',
+    title: '更新时间Max',
     noJson: true,
     temporalType: TemporalType.TIMESTAMP,
     format: TIMESTAMP_FORMAT,
@@ -212,25 +224,13 @@ namespace CategorySubColumns {
     },
   } as ColumnConfig<CategorySub>;
 
-  /** 更新时间Max  TIMESTAMP*/
-  export const updateTimeMax = {
-    key: 'updateTimeMax',
-    dataIndex: 'updateTimeMax',
-    title: '更新时间Max',
-    noJson: true,
-    temporalType: TemporalType.TIMESTAMP,
-    format: TIMESTAMP_FORMAT,
-    config: {
-    },
-  } as ColumnConfig<CategorySub>;
-
 
   export const renderColumns = {
-    categorySubId,
     categoryId,
-    subName,
+    categorySubId,
     comments,
     createTime,
+    subName,
     updateTime,
   }
 

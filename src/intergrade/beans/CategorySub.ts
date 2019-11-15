@@ -11,50 +11,50 @@ export const CategorySub_ID: string = 'categorySubId';
 
 export default interface CategorySub extends Bean {
 
-  /** categorySubId */
-  categorySubId?: string;
-
   /** categoryId */
   categoryId?: string;
-
-  /** subName */
-  subName?: string;
-
-  /** comments */
-  comments?: string;
-
-  /** 创建时间 */
-  createTime?: Date;
-
-  /** 更新时间 */
-  updateTime?: Date;
-
-  /** 是否删除(0:正常，1删除) */
-  deleteFlag?: number;
-
-  /** categorySubId s */
-  categorySubIds?: string[];
 
   /** categoryId s */
   categoryIds?: string[];
 
-  /** subNameLike */
-  subNameLike?: string;
+  /** categorySubId */
+  categorySubId?: string;
+
+  /** categorySubId s */
+  categorySubIds?: string[];
+
+  /** comments */
+  comments?: string;
 
   /** commentsLike */
   commentsLike?: string;
 
-  /** 创建时间Min */
-  createTimeMin?: Date;
+  /** 创建时间 */
+  createTime?: Date;
 
   /** 创建时间Max */
   createTimeMax?: Date;
 
-  /** 更新时间Min */
-  updateTimeMin?: Date;
+  /** 创建时间Min */
+  createTimeMin?: Date;
+
+  /** 是否删除(0:正常，1删除) */
+  deleteFlag?: number;
+
+  /** subName */
+  subName?: string;
+
+  /** subNameLike */
+  subNameLike?: string;
+
+  /** 更新时间 */
+  updateTime?: Date;
 
   /** 更新时间Max */
   updateTimeMax?: Date;
+
+  /** 更新时间Min */
+  updateTimeMin?: Date;
 
 }
 

@@ -10,6 +10,60 @@ import UIColumns from "@utils/UIColumns";
 
 namespace HomeShopColumns {
 
+  /** 创建时间  TIMESTAMP*/
+  export const createTime = {
+    key: 'createTime',
+    dataIndex: 'createTime',
+    title: '创建时间',
+    renderColumn: UIColumns.TimeStampRender,
+    hidden: true,
+    temporalType: TemporalType.TIMESTAMP,
+    format: TIMESTAMP_FORMAT,
+    config: {
+    },
+    render: (text: any, record: HomeShop, index: number) =>{
+      return createTime.renderColumn(record, null, text, index, createTime);
+    },
+  } as ColumnConfig<HomeShop>;
+
+  /** 创建时间Max  TIMESTAMP*/
+  export const createTimeMax = {
+    key: 'createTimeMax',
+    dataIndex: 'createTimeMax',
+    title: '创建时间Max',
+    noJson: true,
+    temporalType: TemporalType.TIMESTAMP,
+    format: TIMESTAMP_FORMAT,
+    config: {
+    },
+  } as ColumnConfig<HomeShop>;
+
+  /** 创建时间Min  TIMESTAMP*/
+  export const createTimeMin = {
+    key: 'createTimeMin',
+    dataIndex: 'createTimeMin',
+    title: '创建时间Min',
+    noJson: true,
+    temporalType: TemporalType.TIMESTAMP,
+    format: TIMESTAMP_FORMAT,
+    config: {
+    },
+  } as ColumnConfig<HomeShop>;
+
+  /** 是否删除(0:正常，1删除)  */
+  export const deleteFlag = {
+    key: 'deleteFlag',
+    dataIndex: 'deleteFlag',
+    title: '是否删除(0:正常',
+    renderColumn: UIColumns.InputRender,
+    hidden: true,
+    config: {
+    },
+    render: (text: any, record: HomeShop, index: number) =>{
+      return deleteFlag.renderColumn(record, null, text, index, deleteFlag);
+    },
+  } as ColumnConfig<HomeShop>;
+
   /** homeShopId  */
   export const homeShopId = {
     key: 'homeShopId',
@@ -30,71 +84,6 @@ namespace HomeShopColumns {
     },
   } as ColumnConfig<HomeShop>;
 
-  /** shopId  */
-  export const shopId = {
-    key: 'shopId',
-    dataIndex: 'shopId',
-    title: 'shopId',
-    renderColumn: UIColumns.InputRender,
-    config: {
-      rules: [
-        {
-          max: 64,
-          message: "最大不能超过{max}",
-        },
-      ],
-    },
-    render: (text: any, record: HomeShop, index: number) =>{
-      return shopId.renderColumn(record, null, text, index, shopId);
-    },
-  } as ColumnConfig<HomeShop>;
-
-  /** 创建时间  TIMESTAMP*/
-  export const createTime = {
-    key: 'createTime',
-    dataIndex: 'createTime',
-    title: '创建时间',
-    renderColumn: UIColumns.TimeStampRender,
-    hidden: true,
-    temporalType: TemporalType.TIMESTAMP,
-    format: TIMESTAMP_FORMAT,
-    config: {
-    },
-    render: (text: any, record: HomeShop, index: number) =>{
-      return createTime.renderColumn(record, null, text, index, createTime);
-    },
-  } as ColumnConfig<HomeShop>;
-
-  /** 更新时间  TIMESTAMP*/
-  export const updateTime = {
-    key: 'updateTime',
-    dataIndex: 'updateTime',
-    title: '更新时间',
-    renderColumn: UIColumns.TimeStampRender,
-    hidden: true,
-    temporalType: TemporalType.TIMESTAMP,
-    format: TIMESTAMP_FORMAT,
-    config: {
-    },
-    render: (text: any, record: HomeShop, index: number) =>{
-      return updateTime.renderColumn(record, null, text, index, updateTime);
-    },
-  } as ColumnConfig<HomeShop>;
-
-  /** 是否删除(0:正常，1删除)  */
-  export const deleteFlag = {
-    key: 'deleteFlag',
-    dataIndex: 'deleteFlag',
-    title: '是否删除(0:正常',
-    renderColumn: UIColumns.InputRender,
-    hidden: true,
-    config: {
-    },
-    render: (text: any, record: HomeShop, index: number) =>{
-      return deleteFlag.renderColumn(record, null, text, index, deleteFlag);
-    },
-  } as ColumnConfig<HomeShop>;
-
   /** homeShopId s  */
   export const homeShopIds = {
     key: 'homeShopIds',
@@ -102,65 +91,6 @@ namespace HomeShopColumns {
     title: 'homeShopId',
     noJson: true,
     isArray: true,
-    config: {
-    },
-  } as ColumnConfig<HomeShop>;
-
-  /** shopId s  */
-  export const shopIds = {
-    key: 'shopIds',
-    dataIndex: 'shopIds',
-    title: 'shopId',
-    noJson: true,
-    isArray: true,
-    config: {
-    },
-  } as ColumnConfig<HomeShop>;
-
-  /** 创建时间Min  TIMESTAMP*/
-  export const createTimeMin = {
-    key: 'createTimeMin',
-    dataIndex: 'createTimeMin',
-    title: '创建时间Min',
-    noJson: true,
-    temporalType: TemporalType.TIMESTAMP,
-    format: TIMESTAMP_FORMAT,
-    config: {
-    },
-  } as ColumnConfig<HomeShop>;
-
-  /** 创建时间Max  TIMESTAMP*/
-  export const createTimeMax = {
-    key: 'createTimeMax',
-    dataIndex: 'createTimeMax',
-    title: '创建时间Max',
-    noJson: true,
-    temporalType: TemporalType.TIMESTAMP,
-    format: TIMESTAMP_FORMAT,
-    config: {
-    },
-  } as ColumnConfig<HomeShop>;
-
-  /** 更新时间Min  TIMESTAMP*/
-  export const updateTimeMin = {
-    key: 'updateTimeMin',
-    dataIndex: 'updateTimeMin',
-    title: '更新时间Min',
-    noJson: true,
-    temporalType: TemporalType.TIMESTAMP,
-    format: TIMESTAMP_FORMAT,
-    config: {
-    },
-  } as ColumnConfig<HomeShop>;
-
-  /** 更新时间Max  TIMESTAMP*/
-  export const updateTimeMax = {
-    key: 'updateTimeMax',
-    dataIndex: 'updateTimeMax',
-    title: '更新时间Max',
-    noJson: true,
-    temporalType: TemporalType.TIMESTAMP,
-    format: TIMESTAMP_FORMAT,
     config: {
     },
   } as ColumnConfig<HomeShop>;
@@ -213,14 +143,84 @@ namespace HomeShopColumns {
     },
   } as ColumnConfig<HomeShop>;
 
+  /** shopId  */
+  export const shopId = {
+    key: 'shopId',
+    dataIndex: 'shopId',
+    title: 'shopId',
+    renderColumn: UIColumns.InputRender,
+    config: {
+      rules: [
+        {
+          max: 64,
+          message: "最大不能超过{max}",
+        },
+      ],
+    },
+    render: (text: any, record: HomeShop, index: number) =>{
+      return shopId.renderColumn(record, null, text, index, shopId);
+    },
+  } as ColumnConfig<HomeShop>;
+
+  /** shopId s  */
+  export const shopIds = {
+    key: 'shopIds',
+    dataIndex: 'shopIds',
+    title: 'shopId',
+    noJson: true,
+    isArray: true,
+    config: {
+    },
+  } as ColumnConfig<HomeShop>;
+
+  /** 更新时间  TIMESTAMP*/
+  export const updateTime = {
+    key: 'updateTime',
+    dataIndex: 'updateTime',
+    title: '更新时间',
+    renderColumn: UIColumns.TimeStampRender,
+    hidden: true,
+    temporalType: TemporalType.TIMESTAMP,
+    format: TIMESTAMP_FORMAT,
+    config: {
+    },
+    render: (text: any, record: HomeShop, index: number) =>{
+      return updateTime.renderColumn(record, null, text, index, updateTime);
+    },
+  } as ColumnConfig<HomeShop>;
+
+  /** 更新时间Max  TIMESTAMP*/
+  export const updateTimeMax = {
+    key: 'updateTimeMax',
+    dataIndex: 'updateTimeMax',
+    title: '更新时间Max',
+    noJson: true,
+    temporalType: TemporalType.TIMESTAMP,
+    format: TIMESTAMP_FORMAT,
+    config: {
+    },
+  } as ColumnConfig<HomeShop>;
+
+  /** 更新时间Min  TIMESTAMP*/
+  export const updateTimeMin = {
+    key: 'updateTimeMin',
+    dataIndex: 'updateTimeMin',
+    title: '更新时间Min',
+    noJson: true,
+    temporalType: TemporalType.TIMESTAMP,
+    format: TIMESTAMP_FORMAT,
+    config: {
+    },
+  } as ColumnConfig<HomeShop>;
+
 
   export const renderColumns = {
-    homeShopId,
-    shopId,
     createTime,
-    updateTime,
+    homeShopId,
     leaderImage,
     leaderPhone,
+    shopId,
+    updateTime,
   }
 
 }

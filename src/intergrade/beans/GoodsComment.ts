@@ -11,68 +11,68 @@ export const GoodsComment_ID: string = 'commentsId';
 
 export default interface GoodsComment extends Bean {
 
-  /** commentsId */
-  commentsId?: string;
-
-  /** goodsId */
-  goodsId?: string;
-
   /** comments */
   comments?: string;
 
-  /** userName */
-  userName?: string;
-
-  /** discussTime */
-  discussTime?: Date;
-
-  /** 创建时间 */
-  createTime?: Date;
-
-  /** 更新时间 */
-  updateTime?: Date;
-
-  /** 是否删除(0:正常，1删除) */
-  deleteFlag?: number;
+  /** commentsId */
+  commentsId?: string;
 
   /** commentsId s */
   commentsIds?: string[];
 
-  /** goodsId s */
-  goodsIds?: string[];
-
   /** commentsLike */
   commentsLike?: string;
 
-  /** userNameLike */
-  userNameLike?: string;
-
-  /** discussTimeMin */
-  discussTimeMin?: Date;
-
-  /** discussTimeMax */
-  discussTimeMax?: Date;
-
-  /** scoreMin */
-  scoreMin?: number;
-
-  /** scoreMax */
-  scoreMax?: number;
-
-  /** 创建时间Min */
-  createTimeMin?: Date;
+  /** 创建时间 */
+  createTime?: Date;
 
   /** 创建时间Max */
   createTimeMax?: Date;
 
-  /** 更新时间Min */
-  updateTimeMin?: Date;
+  /** 创建时间Min */
+  createTimeMin?: Date;
+
+  /** 是否删除(0:正常，1删除) */
+  deleteFlag?: number;
+
+  /** discussTime */
+  discussTime?: Date;
+
+  /** discussTimeMax */
+  discussTimeMax?: Date;
+
+  /** discussTimeMin */
+  discussTimeMin?: Date;
+
+  /** goodsId */
+  goodsId?: string;
+
+  /** goodsId s */
+  goodsIds?: string[];
+
+  /** sCORE */
+  sCORE?: number;
+
+  /** scoreMax */
+  scoreMax?: number;
+
+  /** scoreMin */
+  scoreMin?: number;
+
+  /** 更新时间 */
+  updateTime?: Date;
 
   /** 更新时间Max */
   updateTimeMax?: Date;
 
-  /** sCORE */
-  sCORE?: number;
+  /** 更新时间Min */
+  updateTimeMin?: Date;
+
+  /** userName */
+  userName?: string;
+
+  /** userNameLike */
+  userNameLike?: string;
 
 }
 

@@ -16,23 +16,23 @@ export default interface FloorGoods extends Bean, Goods {
   /** floorGoodsId */
   floorGoodsId?: string;
 
-  /** floorId */
-  floorId?: string;
-
-  /** orderNo */
-  orderNo?: number;
-
   /** floorGoodsId s */
   floorGoodsIds?: string[];
+
+  /** floorId */
+  floorId?: string;
 
   /** floorId s */
   floorIds?: string[];
 
-  /** orderNoMin */
-  orderNoMin?: number;
+  /** orderNo */
+  orderNo?: number;
 
   /** orderNoMax */
   orderNoMax?: number;
+
+  /** orderNoMin */
+  orderNoMin?: number;
 
 }
 

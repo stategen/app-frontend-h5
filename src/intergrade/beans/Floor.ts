@@ -13,59 +13,59 @@ export const Floor_ID: string = 'floorId';
 
 export default interface Floor extends Bean {
 
-  /** floorGoodss */
-  floorGoodss?: FloorGoods[];
-
-  /** advertisePicture */
-  advertisePicture?: AdvertisePicture;
-
-  /** floorId */
-  floorId?: string;
-
   /** advertiseId */
   advertiseId?: number;
-
-  /** orderNo */
-  orderNo?: number;
-
-  /** floorName */
-  floorName?: string;
-
-  /** 创建时间 */
-  createTime?: Date;
-
-  /** 更新时间 */
-  updateTime?: Date;
-
-  /** 是否删除(0:正常，1删除) */
-  deleteFlag?: number;
-
-  /** floorId s */
-  floorIds?: string[];
 
   /** advertiseId s */
   advertiseIds?: number[];
 
-  /** orderNoMin */
-  orderNoMin?: number;
+  /** advertisePicture */
+  advertisePicture?: AdvertisePicture;
 
-  /** orderNoMax */
-  orderNoMax?: number;
-
-  /** floorNameLike */
-  floorNameLike?: string;
-
-  /** 创建时间Min */
-  createTimeMin?: Date;
+  /** 创建时间 */
+  createTime?: Date;
 
   /** 创建时间Max */
   createTimeMax?: Date;
 
-  /** 更新时间Min */
-  updateTimeMin?: Date;
+  /** 创建时间Min */
+  createTimeMin?: Date;
+
+  /** 是否删除(0:正常，1删除) */
+  deleteFlag?: number;
+
+  /** floorGoodss */
+  floorGoodss?: FloorGoods[];
+
+  /** floorId */
+  floorId?: string;
+
+  /** floorId s */
+  floorIds?: string[];
+
+  /** floorName */
+  floorName?: string;
+
+  /** floorNameLike */
+  floorNameLike?: string;
+
+  /** orderNo */
+  orderNo?: number;
+
+  /** orderNoMax */
+  orderNoMax?: number;
+
+  /** orderNoMin */
+  orderNoMin?: number;
+
+  /** 更新时间 */
+  updateTime?: Date;
 
   /** 更新时间Max */
   updateTimeMax?: Date;
+
+  /** 更新时间Min */
+  updateTimeMin?: Date;
 
 }
 

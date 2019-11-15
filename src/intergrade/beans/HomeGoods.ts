@@ -13,20 +13,20 @@ export const HomeGoods_ID: string = 'recommendId';
 
 export default interface HomeGoods extends Bean, Goods {
 
-  /** recommendId */
-  recommendId?: string;
-
   /** orderNo */
   orderNo?: number;
 
-  /** recommendId s */
-  recommendIds?: string[];
+  /** orderNoMax */
+  orderNoMax?: number;
 
   /** orderNoMin */
   orderNoMin?: number;
 
-  /** orderNoMax */
-  orderNoMax?: number;
+  /** recommendId */
+  recommendId?: string;
+
+  /** recommendId s */
+  recommendIds?: string[];
 
 }
 

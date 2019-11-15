@@ -15,23 +15,23 @@ import {Bean} from "@utils/DvaUtil";
 
 export default interface HomeWrap extends Bean {
 
-  /** slides */
-  slides?: Slide[];
-
-  /** shopInfo */
-  shopInfo?: HomeShop;
-
-  /** recommend */
-  recommend?: HomeGoods[];
-
   /** advertesPicture */
   advertesPicture?: HomeAdvertise;
+
+  /** category */
+  category?: Category[];
 
   /** floors */
   floors?: Floor[];
 
-  /** category */
-  category?: Category[];
+  /** recommend */
+  recommend?: HomeGoods[];
+
+  /** shopInfo */
+  shopInfo?: HomeShop;
+
+  /** slides */
+  slides?: Slide[];
 
 }
 

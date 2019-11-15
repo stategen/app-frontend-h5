@@ -14,53 +14,53 @@ export default interface AdvertisePicture extends Bean {
   /** advertiseId */
   advertiseId?: number;
 
-  /** pictureAddress */
-  pictureAddress?: string;
-
-  /** toPlace */
-  toPlace?: string;
-
-  /** urlType */
-  urlType?: number;
+  /** advertiseId s */
+  advertiseIds?: number[];
 
   /** 创建时间 */
   createTime?: Date;
 
-  /** 更新时间 */
-  updateTime?: Date;
-
-  /** 是否删除(0:正常，1删除) */
-  deleteFlag?: number;
-
-  /** advertiseId s */
-  advertiseIds?: number[];
-
-  /** pictureAddressLike */
-  pictureAddressLike?: string;
-
-  /** toPlaceLike */
-  toPlaceLike?: string;
-
-  /** urlType s */
-  urlTypes?: number[];
+  /** 创建时间Max */
+  createTimeMax?: Date;
 
   /** 创建时间Min */
   createTimeMin?: Date;
 
-  /** 创建时间Max */
-  createTimeMax?: Date;
-
-  /** 更新时间Min */
-  updateTimeMin?: Date;
-
-  /** 更新时间Max */
-  updateTimeMax?: Date;
+  /** 是否删除(0:正常，1删除) */
+  deleteFlag?: number;
 
   /** pICTURE_ADDRESS */
   pICTURE_ADDRESS?: string;
 
+  /** pictureAddress */
+  pictureAddress?: string;
+
+  /** pictureAddressLike */
+  pictureAddressLike?: string;
+
   /** tO_PLACE */
   tO_PLACE?: string;
+
+  /** toPlace */
+  toPlace?: string;
+
+  /** toPlaceLike */
+  toPlaceLike?: string;
+
+  /** 更新时间 */
+  updateTime?: Date;
+
+  /** 更新时间Max */
+  updateTimeMax?: Date;
+
+  /** 更新时间Min */
+  updateTimeMin?: Date;
+
+  /** urlType */
+  urlType?: number;
+
+  /** urlType s */
+  urlTypes?: number[];
 
 }
 

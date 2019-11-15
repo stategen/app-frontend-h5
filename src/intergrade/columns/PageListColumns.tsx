@@ -10,16 +10,17 @@ import UIColumns from "@utils/UIColumns";
 
 namespace PageListColumns {
 
-  /** pageSize  */
-  export const pageSize = {
-    key: 'pageSize',
-    dataIndex: 'pageSize',
-    title: 'pageSize',
+  /** items  */
+  export const items = {
+    key: 'items',
+    dataIndex: 'items',
+    title: 'items',
     renderColumn: UIColumns.InputRender,
+    isArray: true,
     config: {
     },
     render: (text: any, record: PageList<E>, index: number) =>{
-      return pageSize.renderColumn(record, null, text, index, pageSize);
+      return items.renderColumn(record, null, text, index, items);
     },
   } as ColumnConfig<PageList<E>>;
 
@@ -33,6 +34,32 @@ namespace PageListColumns {
     },
     render: (text: any, record: PageList<E>, index: number) =>{
       return pageNum.renderColumn(record, null, text, index, pageNum);
+    },
+  } as ColumnConfig<PageList<E>>;
+
+  /** pageSize  */
+  export const pageSize = {
+    key: 'pageSize',
+    dataIndex: 'pageSize',
+    title: 'pageSize',
+    renderColumn: UIColumns.InputRender,
+    config: {
+    },
+    render: (text: any, record: PageList<E>, index: number) =>{
+      return pageSize.renderColumn(record, null, text, index, pageSize);
+    },
+  } as ColumnConfig<PageList<E>>;
+
+  /** pagination  */
+  export const pagination = {
+    key: 'pagination',
+    dataIndex: 'pagination',
+    title: 'pagination',
+    renderColumn: UIColumns.InputRender,
+    config: {
+    },
+    render: (text: any, record: PageList<E>, index: number) =>{
+      return pagination.renderColumn(record, null, text, index, pagination);
     },
   } as ColumnConfig<PageList<E>>;
 
@@ -62,41 +89,14 @@ namespace PageListColumns {
     },
   } as ColumnConfig<PageList<E>>;
 
-  /** items  */
-  export const items = {
-    key: 'items',
-    dataIndex: 'items',
-    title: 'items',
-    renderColumn: UIColumns.InputRender,
-    isArray: true,
-    config: {
-    },
-    render: (text: any, record: PageList<E>, index: number) =>{
-      return items.renderColumn(record, null, text, index, items);
-    },
-  } as ColumnConfig<PageList<E>>;
-
-  /** pagination  */
-  export const pagination = {
-    key: 'pagination',
-    dataIndex: 'pagination',
-    title: 'pagination',
-    renderColumn: UIColumns.InputRender,
-    config: {
-    },
-    render: (text: any, record: PageList<E>, index: number) =>{
-      return pagination.renderColumn(record, null, text, index, pagination);
-    },
-  } as ColumnConfig<PageList<E>>;
-
 
   export const renderColumns = {
-    pageSize,
+    items,
     pageNum,
+    pageSize,
+    pagination,
     totalCount,
     totalPages,
-    items,
-    pagination,
   }
 
 }

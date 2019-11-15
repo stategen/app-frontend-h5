@@ -10,23 +10,23 @@ import {Bean} from "@utils/DvaUtil";
 
 export default interface PageList<E> extends Bean {
 
-  /** pageSize */
-  pageSize?: number;
+  /** items */
+  items?: E[];
 
   /** pageNum */
   pageNum?: number;
+
+  /** pageSize */
+  pageSize?: number;
+
+  /** pagination */
+  pagination?: PaginationProps;
 
   /** totalCount */
   totalCount?: number;
 
   /** totalPages */
   totalPages?: number;
-
-  /** items */
-  items?: E[];
-
-  /** pagination */
-  pagination?: PaginationProps;
 
 }
 

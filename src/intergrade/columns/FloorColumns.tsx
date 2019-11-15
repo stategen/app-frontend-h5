@@ -10,17 +10,33 @@ import UIColumns from "@utils/UIColumns";
 
 namespace FloorColumns {
 
-  /** floorGoodss  */
-  export const floorGoodss = {
-    key: 'floorGoodss',
-    dataIndex: 'floorGoodss',
-    title: 'floorGoodss',
+  /** advertiseId  */
+  export const advertiseId = {
+    key: 'advertiseId',
+    dataIndex: 'advertiseId',
+    title: 'advertiseId',
     renderColumn: UIColumns.InputRender,
-    isArray: true,
     config: {
+      rules: [
+        {
+          max: 64,
+          message: "最大不能超过{max}",
+        },
+      ],
     },
     render: (text: any, record: Floor, index: number) =>{
-      return floorGoodss.renderColumn(record, null, text, index, floorGoodss);
+      return advertiseId.renderColumn(record, null, text, index, advertiseId);
+    },
+  } as ColumnConfig<Floor>;
+
+  /** advertiseId s  */
+  export const advertiseIds = {
+    key: 'advertiseIds',
+    dataIndex: 'advertiseIds',
+    title: 'advertiseId',
+    noJson: true,
+    isArray: true,
+    config: {
     },
   } as ColumnConfig<Floor>;
 
@@ -34,6 +50,74 @@ namespace FloorColumns {
     },
     render: (text: any, record: Floor, index: number) =>{
       return advertisePicture.renderColumn(record, null, text, index, advertisePicture);
+    },
+  } as ColumnConfig<Floor>;
+
+  /** 创建时间  TIMESTAMP*/
+  export const createTime = {
+    key: 'createTime',
+    dataIndex: 'createTime',
+    title: '创建时间',
+    renderColumn: UIColumns.TimeStampRender,
+    hidden: true,
+    temporalType: TemporalType.TIMESTAMP,
+    format: TIMESTAMP_FORMAT,
+    config: {
+    },
+    render: (text: any, record: Floor, index: number) =>{
+      return createTime.renderColumn(record, null, text, index, createTime);
+    },
+  } as ColumnConfig<Floor>;
+
+  /** 创建时间Max  TIMESTAMP*/
+  export const createTimeMax = {
+    key: 'createTimeMax',
+    dataIndex: 'createTimeMax',
+    title: '创建时间Max',
+    noJson: true,
+    temporalType: TemporalType.TIMESTAMP,
+    format: TIMESTAMP_FORMAT,
+    config: {
+    },
+  } as ColumnConfig<Floor>;
+
+  /** 创建时间Min  TIMESTAMP*/
+  export const createTimeMin = {
+    key: 'createTimeMin',
+    dataIndex: 'createTimeMin',
+    title: '创建时间Min',
+    noJson: true,
+    temporalType: TemporalType.TIMESTAMP,
+    format: TIMESTAMP_FORMAT,
+    config: {
+    },
+  } as ColumnConfig<Floor>;
+
+  /** 是否删除(0:正常，1删除)  */
+  export const deleteFlag = {
+    key: 'deleteFlag',
+    dataIndex: 'deleteFlag',
+    title: '是否删除(0:正常',
+    renderColumn: UIColumns.InputRender,
+    hidden: true,
+    config: {
+    },
+    render: (text: any, record: Floor, index: number) =>{
+      return deleteFlag.renderColumn(record, null, text, index, deleteFlag);
+    },
+  } as ColumnConfig<Floor>;
+
+  /** floorGoodss  */
+  export const floorGoodss = {
+    key: 'floorGoodss',
+    dataIndex: 'floorGoodss',
+    title: 'floorGoodss',
+    renderColumn: UIColumns.InputRender,
+    isArray: true,
+    config: {
+    },
+    render: (text: any, record: Floor, index: number) =>{
+      return floorGoodss.renderColumn(record, null, text, index, floorGoodss);
     },
   } as ColumnConfig<Floor>;
 
@@ -57,35 +141,14 @@ namespace FloorColumns {
     },
   } as ColumnConfig<Floor>;
 
-  /** advertiseId  */
-  export const advertiseId = {
-    key: 'advertiseId',
-    dataIndex: 'advertiseId',
-    title: 'advertiseId',
-    renderColumn: UIColumns.InputRender,
+  /** floorId s  */
+  export const floorIds = {
+    key: 'floorIds',
+    dataIndex: 'floorIds',
+    title: 'floorId',
+    noJson: true,
+    isArray: true,
     config: {
-      rules: [
-        {
-          max: 64,
-          message: "最大不能超过{max}",
-        },
-      ],
-    },
-    render: (text: any, record: Floor, index: number) =>{
-      return advertiseId.renderColumn(record, null, text, index, advertiseId);
-    },
-  } as ColumnConfig<Floor>;
-
-  /** orderNo  */
-  export const orderNo = {
-    key: 'orderNo',
-    dataIndex: 'orderNo',
-    title: 'orderNo',
-    renderColumn: UIColumns.InputRender,
-    config: {
-    },
-    render: (text: any, record: Floor, index: number) =>{
-      return orderNo.renderColumn(record, null, text, index, orderNo);
     },
   } as ColumnConfig<Floor>;
 
@@ -108,19 +171,46 @@ namespace FloorColumns {
     },
   } as ColumnConfig<Floor>;
 
-  /** 创建时间  TIMESTAMP*/
-  export const createTime = {
-    key: 'createTime',
-    dataIndex: 'createTime',
-    title: '创建时间',
-    renderColumn: UIColumns.TimeStampRender,
-    hidden: true,
-    temporalType: TemporalType.TIMESTAMP,
-    format: TIMESTAMP_FORMAT,
+  /** floorNameLike  */
+  export const floorNameLike = {
+    key: 'floorNameLike',
+    dataIndex: 'floorNameLike',
+    title: 'floorNameLike',
+    noJson: true,
+    config: {
+    },
+  } as ColumnConfig<Floor>;
+
+  /** orderNo  */
+  export const orderNo = {
+    key: 'orderNo',
+    dataIndex: 'orderNo',
+    title: 'orderNo',
+    renderColumn: UIColumns.InputRender,
     config: {
     },
     render: (text: any, record: Floor, index: number) =>{
-      return createTime.renderColumn(record, null, text, index, createTime);
+      return orderNo.renderColumn(record, null, text, index, orderNo);
+    },
+  } as ColumnConfig<Floor>;
+
+  /** orderNoMax  */
+  export const orderNoMax = {
+    key: 'orderNoMax',
+    dataIndex: 'orderNoMax',
+    title: 'orderNoMax',
+    noJson: true,
+    config: {
+    },
+  } as ColumnConfig<Floor>;
+
+  /** orderNoMin  */
+  export const orderNoMin = {
+    key: 'orderNoMin',
+    dataIndex: 'orderNoMin',
+    title: 'orderNoMin',
+    noJson: true,
+    config: {
     },
   } as ColumnConfig<Floor>;
 
@@ -140,89 +230,11 @@ namespace FloorColumns {
     },
   } as ColumnConfig<Floor>;
 
-  /** 是否删除(0:正常，1删除)  */
-  export const deleteFlag = {
-    key: 'deleteFlag',
-    dataIndex: 'deleteFlag',
-    title: '是否删除(0:正常',
-    renderColumn: UIColumns.InputRender,
-    hidden: true,
-    config: {
-    },
-    render: (text: any, record: Floor, index: number) =>{
-      return deleteFlag.renderColumn(record, null, text, index, deleteFlag);
-    },
-  } as ColumnConfig<Floor>;
-
-  /** floorId s  */
-  export const floorIds = {
-    key: 'floorIds',
-    dataIndex: 'floorIds',
-    title: 'floorId',
-    noJson: true,
-    isArray: true,
-    config: {
-    },
-  } as ColumnConfig<Floor>;
-
-  /** advertiseId s  */
-  export const advertiseIds = {
-    key: 'advertiseIds',
-    dataIndex: 'advertiseIds',
-    title: 'advertiseId',
-    noJson: true,
-    isArray: true,
-    config: {
-    },
-  } as ColumnConfig<Floor>;
-
-  /** orderNoMin  */
-  export const orderNoMin = {
-    key: 'orderNoMin',
-    dataIndex: 'orderNoMin',
-    title: 'orderNoMin',
-    noJson: true,
-    config: {
-    },
-  } as ColumnConfig<Floor>;
-
-  /** orderNoMax  */
-  export const orderNoMax = {
-    key: 'orderNoMax',
-    dataIndex: 'orderNoMax',
-    title: 'orderNoMax',
-    noJson: true,
-    config: {
-    },
-  } as ColumnConfig<Floor>;
-
-  /** floorNameLike  */
-  export const floorNameLike = {
-    key: 'floorNameLike',
-    dataIndex: 'floorNameLike',
-    title: 'floorNameLike',
-    noJson: true,
-    config: {
-    },
-  } as ColumnConfig<Floor>;
-
-  /** 创建时间Min  TIMESTAMP*/
-  export const createTimeMin = {
-    key: 'createTimeMin',
-    dataIndex: 'createTimeMin',
-    title: '创建时间Min',
-    noJson: true,
-    temporalType: TemporalType.TIMESTAMP,
-    format: TIMESTAMP_FORMAT,
-    config: {
-    },
-  } as ColumnConfig<Floor>;
-
-  /** 创建时间Max  TIMESTAMP*/
-  export const createTimeMax = {
-    key: 'createTimeMax',
-    dataIndex: 'createTimeMax',
-    title: '创建时间Max',
+  /** 更新时间Max  TIMESTAMP*/
+  export const updateTimeMax = {
+    key: 'updateTimeMax',
+    dataIndex: 'updateTimeMax',
+    title: '更新时间Max',
     noJson: true,
     temporalType: TemporalType.TIMESTAMP,
     format: TIMESTAMP_FORMAT,
@@ -242,25 +254,13 @@ namespace FloorColumns {
     },
   } as ColumnConfig<Floor>;
 
-  /** 更新时间Max  TIMESTAMP*/
-  export const updateTimeMax = {
-    key: 'updateTimeMax',
-    dataIndex: 'updateTimeMax',
-    title: '更新时间Max',
-    noJson: true,
-    temporalType: TemporalType.TIMESTAMP,
-    format: TIMESTAMP_FORMAT,
-    config: {
-    },
-  } as ColumnConfig<Floor>;
-
 
   export const renderColumns = {
-    floorId,
     advertiseId,
-    orderNo,
-    floorName,
     createTime,
+    floorId,
+    floorName,
+    orderNo,
     updateTime,
   }
 

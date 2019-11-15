@@ -10,47 +10,6 @@ import UIColumns from "@utils/UIColumns";
 
 namespace HomeWrapColumns {
 
-  /** slides  */
-  export const slides = {
-    key: 'slides',
-    dataIndex: 'slides',
-    title: 'slides',
-    renderColumn: UIColumns.InputRender,
-    isArray: true,
-    config: {
-    },
-    render: (text: any, record: HomeWrap, index: number) =>{
-      return slides.renderColumn(record, null, text, index, slides);
-    },
-  } as ColumnConfig<HomeWrap>;
-
-  /** shopInfo  */
-  export const shopInfo = {
-    key: 'shopInfo',
-    dataIndex: 'shopInfo',
-    title: 'shopInfo',
-    renderColumn: UIColumns.InputRender,
-    config: {
-    },
-    render: (text: any, record: HomeWrap, index: number) =>{
-      return shopInfo.renderColumn(record, null, text, index, shopInfo);
-    },
-  } as ColumnConfig<HomeWrap>;
-
-  /** recommend  */
-  export const recommend = {
-    key: 'recommend',
-    dataIndex: 'recommend',
-    title: 'recommend',
-    renderColumn: UIColumns.InputRender,
-    isArray: true,
-    config: {
-    },
-    render: (text: any, record: HomeWrap, index: number) =>{
-      return recommend.renderColumn(record, null, text, index, recommend);
-    },
-  } as ColumnConfig<HomeWrap>;
-
   /** advertesPicture  */
   export const advertesPicture = {
     key: 'advertesPicture',
@@ -61,6 +20,20 @@ namespace HomeWrapColumns {
     },
     render: (text: any, record: HomeWrap, index: number) =>{
       return advertesPicture.renderColumn(record, null, text, index, advertesPicture);
+    },
+  } as ColumnConfig<HomeWrap>;
+
+  /** category  */
+  export const category = {
+    key: 'category',
+    dataIndex: 'category',
+    title: 'category',
+    renderColumn: UIColumns.InputRender,
+    isArray: true,
+    config: {
+    },
+    render: (text: any, record: HomeWrap, index: number) =>{
+      return category.renderColumn(record, null, text, index, category);
     },
   } as ColumnConfig<HomeWrap>;
 
@@ -78,17 +51,44 @@ namespace HomeWrapColumns {
     },
   } as ColumnConfig<HomeWrap>;
 
-  /** category  */
-  export const category = {
-    key: 'category',
-    dataIndex: 'category',
-    title: 'category',
+  /** recommend  */
+  export const recommend = {
+    key: 'recommend',
+    dataIndex: 'recommend',
+    title: 'recommend',
     renderColumn: UIColumns.InputRender,
     isArray: true,
     config: {
     },
     render: (text: any, record: HomeWrap, index: number) =>{
-      return category.renderColumn(record, null, text, index, category);
+      return recommend.renderColumn(record, null, text, index, recommend);
+    },
+  } as ColumnConfig<HomeWrap>;
+
+  /** shopInfo  */
+  export const shopInfo = {
+    key: 'shopInfo',
+    dataIndex: 'shopInfo',
+    title: 'shopInfo',
+    renderColumn: UIColumns.InputRender,
+    config: {
+    },
+    render: (text: any, record: HomeWrap, index: number) =>{
+      return shopInfo.renderColumn(record, null, text, index, shopInfo);
+    },
+  } as ColumnConfig<HomeWrap>;
+
+  /** slides  */
+  export const slides = {
+    key: 'slides',
+    dataIndex: 'slides',
+    title: 'slides',
+    renderColumn: UIColumns.InputRender,
+    isArray: true,
+    config: {
+    },
+    render: (text: any, record: HomeWrap, index: number) =>{
+      return slides.renderColumn(record, null, text, index, slides);
     },
   } as ColumnConfig<HomeWrap>;
 
