@@ -71,6 +71,19 @@ export default class AppApis {
   }
 
   /**
+   * GET /api/app/getLongs
+   * 
+   */
+  static getLongs(params: { parentRegionId?: number } | number): number[] {
+    let requestInit: RequestInitEx = <RequestInitEx>{};
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
+    requestInit.url = '/api/app/getLongs';
+    requestInit.data = (params instanceof Object && !Array.isArray(params)) ? params : {parentRegionId: params};
+    requestInit.method = Method.GET;
+    return Net.fetch(requestInit);
+  }
+
+  /**
    * POST /api/app/getProvinceOptions
    * 省份
    */
@@ -123,6 +136,19 @@ export default class AppApis {
     requestInit.mediaType = MediaType.FORM;
     requestInit.data = params;
     requestInit.method = Method.POST;
+    return Net.fetch(requestInit);
+  }
+
+  /**
+   * GET /api/app/testRegions
+   * 
+   */
+  static testRegions(params: { parentRegionId?: number } | number): Region[] {
+    let requestInit: RequestInitEx = <RequestInitEx>{};
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
+    requestInit.url = '/api/app/testRegions';
+    requestInit.data = (params instanceof Object && !Array.isArray(params)) ? params : {parentRegionId: params};
+    requestInit.method = Method.GET;
     return Net.fetch(requestInit);
   }
 
