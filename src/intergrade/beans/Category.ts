@@ -10,6 +10,10 @@ import {Bean} from "@utils/DvaUtil";
 /** categoryId */
 export const Category_ID: string = 'categoryId';
 
+export const CategoryFields = {
+  categoryId: Category_ID,
+}
+
 export default interface Category extends Bean {
 
   /** 大类目录ID */

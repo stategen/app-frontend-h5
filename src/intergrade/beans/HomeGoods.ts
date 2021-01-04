@@ -11,6 +11,10 @@ import {Bean} from "@utils/DvaUtil";
 /** recommendId */
 export const HomeGoods_ID: string = 'recommendId';
 
+export const HomeGoodsFields = {
+  recommendId: HomeGoods_ID,
+}
+
 export default interface HomeGoods extends Bean, Goods {
 
   /** orderNo */
@@ -21,6 +25,9 @@ export default interface HomeGoods extends Bean, Goods {
 
   /** orderNoMin */
   orderNoMin?: number;
+
+  /** orderNo s */
+  orderNos?: number[];
 
   /** recommendId */
   recommendId?: string;

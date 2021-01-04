@@ -9,6 +9,10 @@ import {Bean} from "@utils/DvaUtil";
 /** commentsId */
 export const GoodsComment_ID: string = 'commentsId';
 
+export const GoodsCommentFields = {
+  commentsId: GoodsComment_ID,
+}
+
 export default interface GoodsComment extends Bean {
 
   /** comments */
@@ -50,8 +54,8 @@ export default interface GoodsComment extends Bean {
   /** goodsId s */
   goodsIds?: string[];
 
-  /** sCORE */
-  sCORE?: number;
+  /** score */
+  score?: number;
 
   /** scoreMax */
   scoreMax?: number;

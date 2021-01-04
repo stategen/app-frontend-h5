@@ -9,6 +9,10 @@ import {Bean} from "@utils/DvaUtil";
 /** homeShopId */
 export const HomeShop_ID: string = 'homeShopId';
 
+export const HomeShopFields = {
+  homeShopId: HomeShop_ID,
+}
+
 export default interface HomeShop extends Bean {
 
   /** 创建时间 */

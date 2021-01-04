@@ -71,19 +71,6 @@ export default class AppApis {
   }
 
   /**
-   * GET /api/app/getLongs
-   * 
-   */
-  static getLongs(params: { parentRegionId?: number } | number): number[] {
-    let requestInit: RequestInitEx = <RequestInitEx>{};
-    requestInit.apiUrlKey = tradeAppBaseUrlKey;
-    requestInit.url = '/api/app/getLongs';
-    requestInit.data = (params instanceof Object && !Array.isArray(params)) ? params : {parentRegionId: params};
-    requestInit.method = Method.GET;
-    return Net.fetch(requestInit);
-  }
-
-  /**
    * POST /api/app/getProvinceOptions
    * 省份
    */
@@ -140,14 +127,40 @@ export default class AppApis {
   }
 
   /**
-   * GET /api/app/testRegions
+   * GET /api/app/test
    * 
    */
-  static testRegions(params: { parentRegionId?: number } | number): Region[] {
+  static test(params?: {}): string {
     let requestInit: RequestInitEx = <RequestInitEx>{};
     requestInit.apiUrlKey = tradeAppBaseUrlKey;
-    requestInit.url = '/api/app/testRegions';
-    requestInit.data = (params instanceof Object && !Array.isArray(params)) ? params : {parentRegionId: params};
+    requestInit.url = '/api/app/test';
+    requestInit.data = params;
+    requestInit.method = Method.GET;
+    return Net.fetch(requestInit, false);
+  }
+
+  /**
+   * GET /api/app/testSeataAt
+   * 
+   */
+  static testSeataAt(params?: {}): User {
+    let requestInit: RequestInitEx = <RequestInitEx>{};
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
+    requestInit.url = '/api/app/testSeataAt';
+    requestInit.data = params;
+    requestInit.method = Method.GET;
+    return Net.fetch(requestInit);
+  }
+
+  /**
+   * GET /api/app/testUid
+   * 
+   */
+  static testUid(params?: {}): string {
+    let requestInit: RequestInitEx = <RequestInitEx>{};
+    requestInit.apiUrlKey = tradeAppBaseUrlKey;
+    requestInit.url = '/api/app/testUid';
+    requestInit.data = params;
     requestInit.method = Method.GET;
     return Net.fetch(requestInit);
   }

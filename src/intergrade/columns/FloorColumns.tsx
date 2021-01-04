@@ -214,6 +214,17 @@ namespace FloorColumns {
     },
   } as ColumnConfig<Floor>;
 
+  /** orderNo s  */
+  export const orderNos = {
+    key: 'orderNos',
+    dataIndex: 'orderNos',
+    title: 'orderNo',
+    noJson: true,
+    isArray: true,
+    config: {
+    },
+  } as ColumnConfig<Floor>;
+
   /** 更新时间  TIMESTAMP*/
   export const updateTime = {
     key: 'updateTime',

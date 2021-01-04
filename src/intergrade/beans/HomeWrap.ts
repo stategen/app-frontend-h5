@@ -13,6 +13,9 @@ import Slide from "../beans/Slide";
 import {Bean} from "@utils/DvaUtil";
 
 
+export const HomeWrapFields = {
+}
+
 export default interface HomeWrap extends Bean {
 
   /** advertesPicture */

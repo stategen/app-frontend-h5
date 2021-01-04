@@ -10,6 +10,10 @@ import {Bean} from "@utils/DvaUtil";
 /** homeAdvId */
 export const HomeAdvertise_ID: string = 'homeAdvId';
 
+export const HomeAdvertiseFields = {
+  homeAdvId: HomeAdvertise_ID,
+}
+
 export default interface HomeAdvertise extends Bean, AdvertisePicture {
 
   /** homeAdvId */

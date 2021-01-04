@@ -9,6 +9,10 @@ import {Bean} from "@utils/DvaUtil";
 /** slideId */
 export const Slide_ID: string = 'slideId';
 
+export const SlideFields = {
+  slideId: Slide_ID,
+}
+
 export default interface Slide extends Bean {
 
   /** 创建时间 */
@@ -41,6 +45,9 @@ export default interface Slide extends Bean {
   /** orderNoMin */
   orderNoMin?: number;
 
+  /** orderNo s */
+  orderNos?: number[];
+
   /** slideId */
   slideId?: string;
 
@@ -58,6 +65,12 @@ export default interface Slide extends Bean {
 
   /** urlType */
   urlType?: number;
+
+  /** urlTypeMax */
+  urlTypeMax?: number;
+
+  /** urlTypeMin */
+  urlTypeMin?: number;
 
   /** urlType s */
   urlTypes?: number[];

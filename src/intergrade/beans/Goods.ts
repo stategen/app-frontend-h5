@@ -10,6 +10,10 @@ import {Bean} from "@utils/DvaUtil";
 /** goodsId */
 export const Goods_ID: string = 'goodsId';
 
+export const GoodsFields = {
+  goodsId: Goods_ID,
+}
+
 export default interface Goods extends Bean {
 
   /** advertiseId */
@@ -29,6 +33,9 @@ export default interface Goods extends Bean {
 
   /** categorySubId */
   categorySubId?: string;
+
+  /** categorySubIdLike */
+  categorySubIdLike?: string;
 
   /** categorySubId s */
   categorySubIds?: string[];

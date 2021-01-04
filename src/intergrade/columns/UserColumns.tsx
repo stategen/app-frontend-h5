@@ -104,9 +104,6 @@ namespace UserColumns {
     referConfig: {
       api: 'getFileSummaryOptions',
       referField: 'avatarImg',
-      optionConvertor: {
-        value: 'fileId',
-      },
     },
     config: {
       rules: [
@@ -736,6 +733,20 @@ namespace UserColumns {
     nullTitle: '请选择',
     render: (text: any, record: User, index: number) =>{
       return status.renderColumn(record, null, text, index, status);
+    },
+  } as ColumnConfig<User>;
+
+  /** 状态Like  */
+  export const statusLike = {
+    key: 'statusLike',
+    dataIndex: 'statusLike',
+    title: '状态Like',
+    noJson: true,
+    isEnum: true,
+    referConfig: {
+      options: statusEnumOptions,
+    },
+    config: {
     },
   } as ColumnConfig<User>;
 

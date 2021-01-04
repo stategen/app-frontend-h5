@@ -74,16 +74,6 @@ namespace TopicColumns {
     },
   } as ColumnConfig<Topic>;
 
-  /** 内容Like  */
-  export const contentLike = {
-    key: 'contentLike',
-    dataIndex: 'contentLike',
-    title: '内容Like',
-    noJson: true,
-    config: {
-    },
-  } as ColumnConfig<Topic>;
-
   /** 创建时间  TIMESTAMP*/
   export const createTime = {
     key: 'createTime',
@@ -120,6 +110,26 @@ namespace TopicColumns {
     noJson: true,
     temporalType: TemporalType.TIMESTAMP,
     format: TIMESTAMP_FORMAT,
+    config: {
+    },
+  } as ColumnConfig<Topic>;
+
+  /** 树(类似部门)主键currOrgId  */
+  export const currOrgId = {
+    key: 'currOrgId',
+    dataIndex: 'currOrgId',
+    title: '树(类似部门)主键currOrgId',
+    noJson: true,
+    config: {
+    },
+  } as ColumnConfig<Topic>;
+
+  /** 所有者currUserId  */
+  export const currUserId = {
+    key: 'currUserId',
+    dataIndex: 'currUserId',
+    title: '所有者currUserId',
+    noJson: true,
     config: {
     },
   } as ColumnConfig<Topic>;
@@ -166,6 +176,16 @@ namespace TopicColumns {
     key: 'goodMin',
     dataIndex: 'goodMin',
     title: '精华Min',
+    noJson: true,
+    config: {
+    },
+  } as ColumnConfig<Topic>;
+
+  /** inclCurrOrgId  */
+  export const inclCurrOrgId = {
+    key: 'inclCurrOrgId',
+    dataIndex: 'inclCurrOrgId',
+    title: 'inclCurrOrgId',
     noJson: true,
     config: {
     },
@@ -290,9 +310,8 @@ namespace TopicColumns {
     key: 'topicId',
     dataIndex: 'topicId',
     title: '主题ID',
-    renderColumn: UIColumns.HiddenRender,
+    renderColumn: UIColumns.InputRender,
     isId: true,
-    typeIsHidden: true,
     config: {
       rules: [
         {
@@ -301,7 +320,6 @@ namespace TopicColumns {
         },
       ],
     },
-    nullTitle: '请选择',
     render: (text: any, record: Topic, index: number) =>{
       return topicId.renderColumn(record, null, text, index, topicId);
     },

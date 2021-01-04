@@ -59,7 +59,7 @@ export default class TopicApis {
    * POST /api/topic/update
    * 
    */
-  static update(params: { authorId?: string, topicType?: string, content?: string, title?: string, lastReplyAt?: string, good?: string, top?: string, visitCount?: number, createAt?: string, testTimestamp?: Date, testDatetime?: Date, testDate?: Date, testTime?: Date, topicId?: string }): Topic {
+  static update(params: { authorId?: string, topicType?: TopicType, content?: string, title?: string, lastReplyAt?: Date, good?: number, top?: TopicType, visitCount?: number, topicId?: string }): Topic {
     let requestInit: RequestInitEx = <RequestInitEx>{};
     requestInit.apiUrlKey = tradeAppBaseUrlKey;
     requestInit.url = '/api/topic/update';

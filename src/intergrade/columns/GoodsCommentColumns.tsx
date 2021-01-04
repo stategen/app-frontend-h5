@@ -194,16 +194,16 @@ namespace GoodsCommentColumns {
     },
   } as ColumnConfig<GoodsComment>;
 
-  /** sCORE  */
-  export const sCORE = {
-    key: 'sCORE',
-    dataIndex: 'sCORE',
-    title: 'sCORE',
+  /** score  */
+  export const score = {
+    key: 'score',
+    dataIndex: 'score',
+    title: 'score',
     renderColumn: UIColumns.InputRender,
     config: {
     },
     render: (text: any, record: GoodsComment, index: number) =>{
-      return sCORE.renderColumn(record, null, text, index, sCORE);
+      return score.renderColumn(record, null, text, index, score);
     },
   } as ColumnConfig<GoodsComment>;
 
@@ -303,7 +303,7 @@ namespace GoodsCommentColumns {
     createTime,
     discussTime,
     goodsId,
-    sCORE,
+    score,
     updateTime,
     userName,
   }

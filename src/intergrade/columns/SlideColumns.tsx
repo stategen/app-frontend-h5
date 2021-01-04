@@ -146,6 +146,17 @@ namespace SlideColumns {
     },
   } as ColumnConfig<Slide>;
 
+  /** orderNo s  */
+  export const orderNos = {
+    key: 'orderNos',
+    dataIndex: 'orderNos',
+    title: 'orderNo',
+    noJson: true,
+    isArray: true,
+    config: {
+    },
+  } as ColumnConfig<Slide>;
+
   /** slideId  */
   export const slideId = {
     key: 'slideId',
@@ -227,6 +238,26 @@ namespace SlideColumns {
     },
     render: (text: any, record: Slide, index: number) =>{
       return urlType.renderColumn(record, null, text, index, urlType);
+    },
+  } as ColumnConfig<Slide>;
+
+  /** urlTypeMax  */
+  export const urlTypeMax = {
+    key: 'urlTypeMax',
+    dataIndex: 'urlTypeMax',
+    title: 'urlTypeMax',
+    noJson: true,
+    config: {
+    },
+  } as ColumnConfig<Slide>;
+
+  /** urlTypeMin  */
+  export const urlTypeMin = {
+    key: 'urlTypeMin',
+    dataIndex: 'urlTypeMin',
+    title: 'urlTypeMin',
+    noJson: true,
+    config: {
     },
   } as ColumnConfig<Slide>;
 

@@ -10,6 +10,10 @@ import {Bean} from "@utils/DvaUtil";
 /** replyId */
 export const TopicReply_ID: string = 'replyId';
 
+export const TopicReplyFields = {
+  replyId: TopicReply_ID,
+}
+
 export default interface TopicReply extends Bean {
 
   /** author */

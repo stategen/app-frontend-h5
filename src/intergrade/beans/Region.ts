@@ -10,6 +10,10 @@ import {Bean} from "@utils/DvaUtil";
 /** regionId */
 export const Region_ID: string = 'regionId';
 
+export const RegionFields = {
+  regionId: Region_ID,
+}
+
 export default interface Region extends Bean {
 
   /** 代码 */
@@ -28,7 +32,7 @@ export default interface Region extends Bean {
   createTimeMin?: Date;
 
   /** 是否删除 (0:正常，1删除) */
-  deleteFlag?: number;
+  deleteFlag?: boolean;
 
   /** isLeaf */
   isLeaf?: boolean;

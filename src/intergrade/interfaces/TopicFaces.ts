@@ -178,7 +178,7 @@ export class TopicDispatch {
 
 
   /**  */
-  static update_effect(params: { authorId?: string, topicType?: string, content?: string, title?: string, lastReplyAt?: string, good?: string, top?: string, visitCount?: number, createAt?: string, testTimestamp?: Date, testDatetime?: Date, testDate?: Date, testTime?: Date, topicId?: string }, areaExtraProps__?: AreaState<any>, stateExtraProps__?: TopicState) {
+  static update_effect(params: { authorId?: string, topicType?: TopicType, content?: string, title?: string, lastReplyAt?: Date, good?: number, top?: TopicType, visitCount?: number, topicId?: string }, areaExtraProps__?: AreaState<any>, stateExtraProps__?: TopicState) {
     return {
       type: topicInitModel.namespace + '/update',
       payload: {

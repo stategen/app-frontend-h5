@@ -20,8 +20,8 @@ namespace Topic_publishApiForms {
   /** 主题ID */
   const saveTopic_topicId = {
     ...TopicColumns.topicId,
-    UIEditor__: UIEditors.BuildHiddenEditor,
-    Editor: UIEditors.BuildHiddenEditor,
+    UIEditor__: UIEditors.BuildInputEditor,
+    Editor: UIEditors.BuildInputEditor,
   };
   /** 主题类型 */
   const saveTopic_topicType = {
@@ -63,7 +63,7 @@ namespace Topic_publishApiForms {
 
   let SaveTopicFormItemConfigMap = null;
   export const removeSaveTopicFormItemConfigMapRef = ((ref) => ref ? null : SaveTopicFormItemConfigMap = null);
-  saveTopic_topicId.Editor = ((props?: UIEditors.HiddenEditorProps) => {
+  saveTopic_topicId.Editor = ((props?: UIEditors.InputEditorProps) => {
     return UIEditors.rebuildEditor(props, SaveTopicFormItemConfigMap.TopicId, removeSaveTopicFormItemConfigMapRef);
   }) as any;
   saveTopic_topicType.Editor = ((props?: UIEditors.SelectEditorProps) => {
@@ -95,7 +95,7 @@ namespace Topic_publishApiForms {
    </TitleEditor>
    */
   export const getSaveTopicFormItemConfigMap = (queryRule: ObjectMap<any> = {}, formProps?: FormProps): ISaveTopicFormItemConfigMap => {
-    /** Hidden */
+    /** Input */
     const saveTopic_topicIdValue = queryRule.topicId;
     /** Select */
     const saveTopic_topicTypeValue = queryRule.topicType;

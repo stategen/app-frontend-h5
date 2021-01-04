@@ -86,6 +86,16 @@ namespace GoodsColumns {
     },
   } as ColumnConfig<Goods>;
 
+  /** categorySubIdLike  */
+  export const categorySubIdLike = {
+    key: 'categorySubIdLike',
+    dataIndex: 'categorySubIdLike',
+    title: 'categorySubIdLike',
+    noJson: true,
+    config: {
+    },
+  } as ColumnConfig<Goods>;
+
   /** categorySubId s  */
   export const categorySubIds = {
     key: 'categorySubIds',

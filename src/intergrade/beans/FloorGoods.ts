@@ -11,6 +11,10 @@ import {Bean} from "@utils/DvaUtil";
 /** floorGoodsId */
 export const FloorGoods_ID: string = 'floorGoodsId';
 
+export const FloorGoodsFields = {
+  floorGoodsId: FloorGoods_ID,
+}
+
 export default interface FloorGoods extends Bean, Goods {
 
   /** floorGoodsId */
@@ -33,6 +37,9 @@ export default interface FloorGoods extends Bean, Goods {
 
   /** orderNoMin */
   orderNoMin?: number;
+
+  /** orderNo s */
+  orderNos?: number[];
 
 }
 

@@ -86,6 +86,16 @@ namespace FloorGoodsColumns {
     },
   } as ColumnConfig<FloorGoods>;
 
+  /** categorySubIdLike  */
+  export const categorySubIdLike = {
+    key: 'categorySubIdLike',
+    dataIndex: 'categorySubIdLike',
+    title: 'categorySubIdLike',
+    noJson: true,
+    config: {
+    },
+  } as ColumnConfig<FloorGoods>;
+
   /** categorySubId s  */
   export const categorySubIds = {
     key: 'categorySubIds',
@@ -673,6 +683,17 @@ namespace FloorGoodsColumns {
     dataIndex: 'orderNoMin',
     title: 'orderNoMin',
     noJson: true,
+    config: {
+    },
+  } as ColumnConfig<FloorGoods>;
+
+  /** orderNo s  */
+  export const orderNos = {
+    key: 'orderNos',
+    dataIndex: 'orderNos',
+    title: 'orderNo',
+    noJson: true,
+    isArray: true,
     config: {
     },
   } as ColumnConfig<FloorGoods>;
